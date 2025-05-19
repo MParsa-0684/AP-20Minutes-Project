@@ -1,6 +1,182 @@
 package com.tilldawn.Model;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class GameAssetManager {
+    private static GameAssetManager gameAssetManager;
+    private static final Skin menuSkin = new Skin(Gdx.files.internal("skin/tracer-ui.json"));
+    private final ArrayList<ArrayList<Texture>> shanan = createHeroTextures(new String[][]{
+        {
+            "Heros/Shanan/idle/Idle_0 #8330.png",
+            "Heros/Shanan/idle/Idle_1 #8360.png",
+            "Heros/Shanan/idle/Idle_2 #8819.png",
+            "Heros/Shanan/idle/Idle_3 #8457.png",
+            "Heros/Shanan/idle/Idle_4 #8318.png",
+            "Heros/Shanan/idle/Idle_5 #8307.png"
+        },
+        {
+            "Heros/Shanan/walk/Walk_0 #8278.png",
+            "Heros/Shanan/walk/Walk_1 #8632.png",
+            "Heros/Shanan/walk/Walk_2 #8711.png",
+            "Heros/Shanan/walk/Walk_3 #8769.png",
+            "Heros/Shanan/walk/Walk_5 #8688.png",
+            "Heros/Shanan/walk/Walk_6 #8442.png",
+            "Heros/Shanan/walk/Walk_7 #8214.png"
+        },
+        {
+            "Heros/Shanan/run/Run_0 #8762.png",
+            "Heros/Shanan/run/Run_1 #8778.png",
+            "Heros/Shanan/run/Run_2 #8286.png",
+            "Heros/Shanan/run/Run_3 #8349.png"
+        }
+    });
 
 
+    private final ArrayList<ArrayList<Texture>> diamond = createHeroTextures(new String[][]{
+        {
+            "Heros/Diamond/idle/Idle_0 #8328.png",
+            "Heros/Diamond/idle/Idle_1 #8358.png",
+            "Heros/Diamond/idle/Idle_2 #8817.png",
+            "Heros/Diamond/idle/Idle_3 #8455.png",
+            "Heros/Diamond/idle/Idle_4 #8316.png",
+            "Heros/Diamond/idle/Idle_5 #8305.png"
+        },
+        {
+            "Heros/Diamond/walk/Walk_0 #8277.png",
+            "Heros/Diamond/walk/Walk_1 #8631.png",
+            "Heros/Diamond/walk/Walk_2 #8710.png",
+            "Heros/Diamond/walk/Walk_3 #8768.png",
+            "Heros/Diamond/walk/Walk_4 #8464.png",
+            "Heros/Diamond/walk/Walk_5 #8687.png",
+            "Heros/Diamond/walk/Walk_6 #8441.png",
+            "Heros/Diamond/walk/Walk_7 #8213.png"
+        },
+        {
+            "Heros/Diamond/run/Run_0 #8760.png",
+            "Heros/Diamond/run/Run_1 #8776.png",
+            "Heros/Diamond/run/Run_2 #8284.png",
+            "Heros/Diamond/run/Run_3 #8347.png"
+        }
+    });
+
+
+
+
+    private final ArrayList<ArrayList<Texture>> scarlet =     createHeroTextures(new String[][]{
+        {
+            "Heros/Scarlet/idle/Idle_0 #8327.png",
+            "Heros/Scarlet/idle/Idle_1 #8357.png",
+            "Heros/Scarlet/idle/Idle_2 #8816.png",
+            "Heros/Scarlet/idle/Idle_3 #8454.png",
+            "Heros/Scarlet/idle/Idle_4 #8315.png",
+            "Heros/Scarlet/idle/Idle_5 #8304.png"
+        },
+        {
+
+        },
+        {
+            "Heros/Scarlet/run/Run_0 #8759.png",
+            "Heros/Scarlet/run/Run_1 #8775.png",
+            "Heros/Scarlet/run/Run_2 #8283.png",
+            "Heros/Scarlet/run/Run_3 #8346.png"
+        }
+    });
+
+
+
+    private final ArrayList<ArrayList<Texture>> lilith = createHeroTextures(new String[][]{
+        {
+            "Heros/Lilith/idle/Idle_0 #8333.png",
+            "Heros/Lilith/idle/Idle_1 #8363.png",
+            "Heros/Lilith/idle/Idle_2 #8822.png",
+            "Heros/Lilith/idle/Idle_3 #8460.png",
+            "Heros/Lilith/idle/Idle_4 #8321.png",
+            "Heros/Lilith/idle/Idle_5 #8310.png"
+        },
+        {
+            "Heros/Lilith/walk/Walk_0 #8279.png",
+            "Heros/Lilith/walk/Walk_1 #8633.png",
+            "Heros/Lilith/walk/Walk_2 #8712.png",
+            "Heros/Lilith/walk/Walk_3 #8770.png",
+            "Heros/Lilith/walk/Walk_4 #8465.png",
+            "Heros/Lilith/walk/Walk_5 #8689.png",
+            "Heros/Lilith/walk/Walk_6 #8443.png",
+            "Heros/Lilith/walk/Walk_7 #8215.png"
+        },
+        {
+            "Heros/Lilith/run/Run_0 #8765.png",
+            "Heros/Lilith/run/Run_1 #8781.png",
+            "Heros/Lilith/run/Run_2 #8289.png",
+            "Heros/Lilith/run/Run_3 #8352.png"
+        }
+    });
+
+    private final ArrayList<ArrayList<Texture>> dasher =     createHeroTextures(new String[][]{
+        {
+            "Heros/Dasher/idle/Idle_0 #8325.png",
+            "Heros/Dasher/idle/Idle_1 #8355.png",
+            "Heros/Dasher/idle/Idle_2 #8814.png",
+            "Heros/Dasher/idle/Idle_3 #8452.png",
+            "Heros/Dasher/idle/Idle_4 #8313.png",
+            "Heros/Dasher/idle/Idle_5 #8302.png"
+        },
+        {
+
+        },
+        {
+            "Heros/Dasher/run/Run_0 #8757.png",
+            "Heros/Dasher/run/Run_1 #8773.png",
+            "Heros/Dasher/run/Run_2 #8281.png",
+            "Heros/Dasher/run/Run_3 #8344.png"
+        }
+    });
+
+
+    public static GameAssetManager getGameAssetManager() {
+        if(gameAssetManager == null) {
+            gameAssetManager = new GameAssetManager();
+        }
+        return gameAssetManager;
+    }
+
+    public Skin getMenuSkin() {
+        return menuSkin;
+    }
+
+    private static ArrayList<ArrayList<Texture>> createHeroTextures(String[][] paths) {
+        ArrayList<ArrayList<Texture>> textures = new ArrayList<>();
+        for (String[] group : paths) {
+            ArrayList<Texture> animationFrames = new ArrayList<>();
+            for (String path : group) {
+                animationFrames.add(new Texture(path));
+            }
+            textures.add(animationFrames);
+        }
+        return textures;
+    }
+
+    public ArrayList<ArrayList<Texture>> getShananaTextures() {
+        return shanan;
+    }
+
+    public ArrayList<ArrayList<Texture>> getDiamondTextures() {
+        return diamond;
+    }
+
+    public ArrayList<ArrayList<Texture>> getScarletTextures() {
+        return scarlet;
+    }
+
+    public ArrayList<ArrayList<Texture>> getLilithTextures() {
+        return lilith;
+    }
+
+    public ArrayList<ArrayList<Texture>> getDasherTextures() {
+        return dasher;
+    }
 }
