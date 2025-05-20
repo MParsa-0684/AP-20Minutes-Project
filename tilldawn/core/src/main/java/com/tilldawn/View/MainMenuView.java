@@ -27,6 +27,7 @@ public class MainMenuView implements Screen {
     private final TextButton exitButton;
     private final Label userNameLabel;
     private final Label scoreLabel;
+    private final Label errorLabel;
     private Table table;
 
 
@@ -43,6 +44,7 @@ public class MainMenuView implements Screen {
         this.exitButton = new TextButton("Exit Account", skin);
         this.userNameLabel = new Label(App.getCurrentUser().getUsername(), skin);
         this.scoreLabel = new Label(String.valueOf(App.getCurrentUser().getScore()), skin);
+        this.errorLabel = new Label("", skin);
 
         controller.setView(this);
     }
@@ -72,7 +74,6 @@ public class MainMenuView implements Screen {
         table.center();
         stage.addActor(table);
 
-// LEFT COLUMN (buttons)
         Table leftColumn = new Table();
         leftColumn.defaults().pad(10).fillX();
 
@@ -82,7 +83,6 @@ public class MainMenuView implements Screen {
         leftColumn.add(scoreButton).row();
         leftColumn.add(hintButton).row();
 
-// RIGHT COLUMN (labels + exit)
         Table rightColumn = new Table();
         rightColumn.defaults().pad(10).fillX();
 
@@ -97,12 +97,12 @@ public class MainMenuView implements Screen {
         rightColumn.add(loadGameButton).row();
         rightColumn.add(exitButton).row();
 
-// Add both columns to main centered table
         titleLabel.setFontScale(3);
         table.add(titleLabel).colspan(2).row();
         table.add(leftColumn).pad(20).top().left();
         table.add(rightColumn).pad(20).top().right();
-
+        table.row();
+        table.add(errorLabel).colspan(2).row();
         //Par3A#!fa
     }
 
@@ -139,5 +139,49 @@ public class MainMenuView implements Screen {
     @Override
     public void dispose() {
 
+    }
+
+    public Label getTitleLabel() {
+        return titleLabel;
+    }
+
+    public TextButton getSettingsButton() {
+        return settingsButton;
+    }
+
+    public TextButton getProfileButton() {
+        return profileButton;
+    }
+
+    public TextButton getPreGameButton() {
+        return preGameButton;
+    }
+
+    public TextButton getScoreButton() {
+        return scoreButton;
+    }
+
+    public TextButton getHintButton() {
+        return hintButton;
+    }
+
+    public TextButton getLoadGameButton() {
+        return loadGameButton;
+    }
+
+    public TextButton getExitButton() {
+        return exitButton;
+    }
+
+    public Label getUserNameLabel() {
+        return userNameLabel;
+    }
+
+    public Label getScoreLabel() {
+        return scoreLabel;
+    }
+
+    public Label getErrorLabel() {
+        return errorLabel;
     }
 }

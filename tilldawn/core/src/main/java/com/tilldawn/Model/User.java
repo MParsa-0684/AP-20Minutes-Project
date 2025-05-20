@@ -6,7 +6,7 @@ public class User {
     private String securityQuestion;
     private String securityAnswer;
     private Avatar avatar;
-    private Player player;
+    private Game game;
     private int score;
 
     public User(String username, String password, String securityQuestion, String securityAnswer, Avatar avatar) {
@@ -15,7 +15,7 @@ public class User {
         this.securityQuestion = securityQuestion;
         this.securityAnswer = securityAnswer;
         this.avatar = avatar;
-        this.player = null;
+        this.game = null;
         this.score = 0;
     }
 
@@ -59,12 +59,12 @@ public class User {
         this.avatar = avatar;
     }
 
-    public Player getPlayer() {
-        return player;
+    public Game getGame() {
+        return game;
     }
 
-    public void setPlayer(Player player) {
-        this.player = player;
+    public void setGame(Game game) {
+        this.game = game;
     }
 
     public int getScore() {
