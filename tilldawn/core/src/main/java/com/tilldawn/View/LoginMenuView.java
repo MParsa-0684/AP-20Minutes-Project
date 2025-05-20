@@ -65,7 +65,7 @@ public class LoginMenuView implements Screen {
 
         table.add(loginButton).pad(0, 110, 0, 200);
         table.add(forgetPasswordButton).pad(0, -100, 0, 50);
-        errorLabel.setFontScale(1.5f);
+        table.row();
         table.add(errorLabel).colspan(2).center();
 
         stage.addActor(table);

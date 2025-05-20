@@ -24,11 +24,15 @@ public class LoginMenuController extends Controller {
         if(view.getLoginButton().isChecked()) {
             view.getLoginButton().setChecked(false);
             User user = checkUserExist(view.getUsernameTextField().getText());
-            if(user == null)
+            if(user == null) {
                 view.getErrorLabel().setText("Your username doesn't exist!");
+                return;
+            }
 
-            if(!user.getPassword().equals(view.getPasswordTextField().getText()))
+            if(!user.getPassword().equals(view.getPasswordTextField().getText())) {
                 view.getErrorLabel().setText("Wrong password!");
+                return;
+            }
 
             App.setCurrentUser(user);
             Main.getMain().getScreen().dispose();
