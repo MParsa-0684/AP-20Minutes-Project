@@ -4,7 +4,7 @@ import com.tilldawn.Main;
 import com.tilldawn.Model.App;
 import com.tilldawn.Model.GameAssetManager;
 import com.tilldawn.Model.User;
-import com.tilldawn.View.ForgetPasswordMenu;
+import com.tilldawn.View.ForgetPasswordMenuView;
 import com.tilldawn.View.LoginMenuView;
 import com.tilldawn.View.MainMenuView;
 
@@ -41,7 +41,7 @@ public class LoginMenuController extends Controller {
         else if(view.getForgetPasswordButton().isChecked()) {
             view.getForgetPasswordButton().setChecked(false);
             Main.getMain().getScreen().dispose();
-            Main.getMain().setScreen(new ForgetPasswordMenu(new ForgetPasswordController(), GameAssetManager.getGameAssetManager().getMenuSkin()));
+            Main.getMain().setScreen(new ForgetPasswordMenuView(new ForgetPasswordController(), GameAssetManager.getGameAssetManager().getMenuSkin()));
         }
 
     }

@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
-import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.tilldawn.Control.LoginMenuController;
@@ -15,8 +14,8 @@ public class LoginMenuView implements Screen {
     private LoginMenuController controller;
     private Table table;
     private final Label viewTitle;
-    private final Label usernameLable;
-    private final Label passwordLable;
+    private final Label usernameLabel;
+    private final Label passwordLabel;
     private final TextField usernameTextField;
     private final TextField passwordTextField;
     private final TextButton forgetPasswordButton;
@@ -27,8 +26,8 @@ public class LoginMenuView implements Screen {
         this.table = new Table();
         this.controller = controller;
         this.viewTitle = new Label("Login Menu", skin);
-        this.usernameLable = new Label("Username:", skin);
-        this.passwordLable = new Label("Password:", skin);
+        this.usernameLabel = new Label("Username:", skin);
+        this.passwordLabel = new Label("Password:", skin);
         this.usernameTextField = new TextField("", skin);
         this.passwordTextField = new TextField("", skin);
         this.forgetPasswordButton = new TextButton("Forgot Password", skin);
@@ -53,10 +52,10 @@ public class LoginMenuView implements Screen {
         table.add(viewTitle).colspan(2).center();
         table.row().space(20);
 
-        usernameLable.setFontScale(1.5f);
-        passwordLable.setFontScale(1.5f);
-        table.add(usernameLable).pad(0, 0, 0, 50);
-        table.add(passwordLable).pad(0, -170, 0, 0);
+        usernameLabel.setFontScale(1.5f);
+        passwordLabel.setFontScale(1.5f);
+        table.add(usernameLabel).pad(0, 0, 0, 50);
+        table.add(passwordLabel).pad(0, -170, 0, 0);
         table.row();
 
         table.add(usernameTextField).pad(0, 0, 0, 50);
@@ -110,12 +109,12 @@ public class LoginMenuView implements Screen {
         return viewTitle;
     }
 
-    public Label getUsernameLable() {
-        return usernameLable;
+    public Label getUsernameLabel() {
+        return usernameLabel;
     }
 
-    public Label getPasswordLable() {
-        return passwordLable;
+    public Label getPasswordLabel() {
+        return passwordLabel;
     }
 
     public TextField getUsernameTextField() {

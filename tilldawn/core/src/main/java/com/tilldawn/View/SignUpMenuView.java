@@ -9,17 +9,14 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.tilldawn.Control.SignUpMenuController;
 import com.tilldawn.Main;
-import com.tilldawn.Model.Avatar;
-
-import java.util.Arrays;
 
 public class SignUpMenuView implements Screen {
     private Stage stage;
     private final SignUpMenuController controller;
     private Table table;
     private final Label viewTitle;
-    private final Label usernameLable;
-    private final Label passwordLable;
+    private final Label usernameLabel;
+    private final Label passwordLabel;
     private final TextField usernameTextField;
     private final TextField passwordTextField;
     private final TextButton GuestButton;
@@ -33,8 +30,8 @@ public class SignUpMenuView implements Screen {
         this.table = new Table();
         this.controller = controller;
         this.viewTitle = new Label("SignUp Menu", skin);
-        this.usernameLable = new Label("Username:", skin);
-        this.passwordLable = new Label("Password:", skin);
+        this.usernameLabel = new Label("Username:", skin);
+        this.passwordLabel = new Label("Password:", skin);
         this.usernameTextField = new TextField("", skin);
         this.passwordTextField = new TextField("", skin);
         this.GuestButton = new TextButton("Guest User", skin);
@@ -65,14 +62,14 @@ public class SignUpMenuView implements Screen {
         table.add(viewTitle).colspan(2).center();
         table.row().space(20);
 
-        usernameLable.setFontScale(1.5f);
-        passwordLable.setFontScale(1.5f);
-        table.add(usernameLable).pad(0, 0, 0, 220);
-        table.add(passwordLable).left();
+        usernameLabel.setFontScale(1.5f);
+        passwordLabel.setFontScale(1.5f);
+        table.add(usernameLabel).pad(0, 0, 0, 220);
+        table.add(passwordLabel).left();
         table.row();
 
-        table.add(usernameTextField).pad(0, 0, 0, 200);
-        table.add(passwordTextField).left();
+        table.add(usernameTextField).width(200).pad(0, 0, 0, 150);
+        table.add(passwordTextField).width(200).left();
         table.row();
 
         table.add(securityQuestions).pad(0, 0, 0, 0);

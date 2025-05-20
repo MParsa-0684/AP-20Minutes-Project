@@ -9,18 +9,7 @@ import com.tilldawn.View.SignUpMenuView;
 import java.util.Random;
 
 public class SignUpMenuController extends Controller {
-    private Pair checkPassword(String password){
-        if(password.length() < 8)
-            return new Pair<>(false, "Your password must be at least 8 characters");
 
-        if(!password.matches(".*[@#$%&*()_].*"))
-            return new Pair<>(false, "Your password must contain at least a letter from @#$%&*()_");
-
-        if(!password.matches(".*\\d.*") || !password.matches(".*[A-Z].*"))
-            return new Pair<>(false, "Your password must contain a capital letter and a number");
-
-        return new Pair<>(true, "Your password is valid");
-    }
 
     private Avatar getRandomAvatar(){
         Random random = new Random();
@@ -60,7 +49,7 @@ public class SignUpMenuController extends Controller {
             App.getUsers().add(new User(
                 view.getUsernameTextField().getText(),
                 view.getPasswordTextField().getText(),
-                view.getSecurityAnswerTextField().getSelection(),
+                view.getSecurityQuestions().getSelected(),
                 view.getSecurityAnswerTextField().getText(),
                 getRandomAvatar()
             ));
