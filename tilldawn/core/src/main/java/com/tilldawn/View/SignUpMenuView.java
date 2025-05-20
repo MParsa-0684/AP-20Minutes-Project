@@ -26,12 +26,13 @@ public class SignUpMenuView implements Screen {
     private final SelectBox<String> securityQuestions;
     private final TextField securityAnswerTextField;
     private final TextButton signUpButton;
+    private final TextButton loginButton;
     private final Label errorLabel;
 
     public SignUpMenuView(SignUpMenuController controller, Skin skin) {
         this.table = new Table();
         this.controller = controller;
-        this.viewTitle = new Label("Sign Up Menu", skin);
+        this.viewTitle = new Label("SignUp Menu", skin);
         this.usernameLable = new Label("Username:", skin);
         this.passwordLable = new Label("Password:", skin);
         this.usernameTextField = new TextField("", skin);
@@ -41,8 +42,9 @@ public class SignUpMenuView implements Screen {
         this.securityQuestions.setItems(new Array<>(new String[]{"1.What was the name of your first car?",
             "2.What city were you born in?",
             "3.What is your favorite teacher’s name?"}));
-        this.securityAnswerTextField = new TextField("Your answer", skin);
+        this.securityAnswerTextField = new TextField("", skin);
         this.signUpButton = new TextButton("Sign Up", skin);
+        this.loginButton = new TextButton("Login Menu", skin);
         this.errorLabel = new Label("", skin);
 
         controller.setView(this);
@@ -65,22 +67,22 @@ public class SignUpMenuView implements Screen {
 
         usernameLable.setFontScale(1.5f);
         passwordLable.setFontScale(1.5f);
-        table.add(usernameLable).right().pad(0, 0, 0, 220);
+        table.add(usernameLable).pad(0, 0, 0, 220);
         table.add(passwordLable).left();
         table.row();
 
-        table.add(usernameTextField).right().pad(0, 0, 0, 200);
+        table.add(usernameTextField).pad(0, 0, 0, 200);
         table.add(passwordTextField).left();
         table.row();
 
-        table.add(securityQuestions).right().pad(0, 50, 0, 0);
+        table.add(securityQuestions).pad(0, 0, 0, 0);
         table.add(securityAnswerTextField).left();
         table.row();
 
-        table.add(signUpButton).right().pad(0, 0, 0, 150);
-        table.add(GuestButton).pad(0, 0, 0, 100);
-        table.row().pad(50);
-        errorLabel.setFontScale(1.5f);
+        table.add(signUpButton).pad(0, 0, 0, 220);
+        table.add(GuestButton).pad(0, -400, 0, 0);
+        table.add(loginButton).pad(0, -200, 0, 0);
+        table.row();
         table.add(errorLabel).colspan(2).center();
 
         stage.addActor(table);
@@ -93,7 +95,7 @@ public class SignUpMenuView implements Screen {
         Main.getBatch().end();
         stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
         stage.draw();
-
+        controller.handleSignUp();
     }
 
     @Override
@@ -147,5 +149,9 @@ public class SignUpMenuView implements Screen {
 
     public SelectBox<String> getSecurityQuestions() {
         return securityQuestions;
+    }
+
+    public TextButton getLoginButton() {
+        return loginButton;
     }
 }

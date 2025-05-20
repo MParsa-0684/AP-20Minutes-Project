@@ -3,28 +3,20 @@ package com.tilldawn.Control;
 import com.tilldawn.Main;
 import com.tilldawn.Model.*;
 import com.tilldawn.View.LoginMenuView;
+import com.tilldawn.View.MainMenuView;
 import com.tilldawn.View.SignUpMenuView;
 
 import java.util.Random;
 
-public class SignUpMenuController {
-    private boolean checkUserExist(String username){
-        for (User user : App.getUsers()) {
-            if(user.getUsername().equals(username)){
-                return true;
-            }
-        }
-        return false;
-    }
-
+public class SignUpMenuController extends Controller {
     private Pair checkPassword(String password){
         if(password.length() < 8)
             return new Pair<>(false, "Your password must be at least 8 characters");
 
-        if(!password.contains("[@#$%&*()_]"))
+        if(!password.matches(".*[@#$%&*()_].*"))
             return new Pair<>(false, "Your password must contain at least a letter from @#$%&*()_");
 
-        if(!password.contains("\\d") || !password.contains("[A-Z]"))
+        if(!password.matches(".*\\d.*") || !password.matches(".*[A-Z].*"))
             return new Pair<>(false, "Your password must contain a capital letter and a number");
 
         return new Pair<>(true, "Your password is valid");
@@ -44,10 +36,6 @@ public class SignUpMenuController {
 
     private SignUpMenuView view;
 
-    public SignUpMenuController() {
-        // Constructor for SignUpMenuController
-    }
-
     public void setView(SignUpMenuView view) {
         this.view = view;
     }
@@ -57,7 +45,8 @@ public class SignUpMenuController {
             return;
 
         if(view.getSignUpButton().isChecked()) {
-            if(checkUserExist(view.getUsernameTextField().getText())) {
+            view.getSignUpButton().setChecked(false);
+            if(checkUserExist(view.getUsernameTextField().getText()) != null) {
                 view.getErrorLabel().setText("Your username is already exist!");
                 return;
             }
@@ -76,9 +65,16 @@ public class SignUpMenuController {
                 getRandomAvatar()
             ));
 
+            view.getErrorLabel().setText("Your account has been successfully registered!");
         }
         else if(view.getGuestButton().isChecked()) {
+            view.getGuestButton().setChecked(false);
             App.setCurrentUser(new User("Guest", "Guest", "null", "null", null));
+            Main.getMain().getScreen().dispose();
+            Main.getMain().setScreen(new MainMenuView(new MainMenuController(), GameAssetManager.getGameAssetManager().getMenuSkin()));
+        }
+        else if(view.getLoginButton().isChecked()) {
+            view.getLoginButton().setChecked(false);
             Main.getMain().getScreen().dispose();
             Main.getMain().setScreen(new LoginMenuView(new LoginMenuController(), GameAssetManager.getGameAssetManager().getMenuSkin()));
         }

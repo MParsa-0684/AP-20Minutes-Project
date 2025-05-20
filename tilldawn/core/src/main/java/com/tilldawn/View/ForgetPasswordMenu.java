@@ -2,13 +2,13 @@ package com.tilldawn.View;
 
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.tilldawn.Control.MainMenuController;
+import com.tilldawn.Control.ForgetPasswordController;
 
-public class MainMenuView implements Screen {
-    private MainMenuController controller;
+public class ForgetPasswordMenu implements Screen {
+    private ForgetPasswordController controller;
 
-    public MainMenuView(MainMenuController controller, Skin skin) {
-        // Constructor for MainMenuController
+    public ForgetPasswordMenu(ForgetPasswordController controller, Skin skin) {
+        this.controller = controller;
     }
 
     @Override
