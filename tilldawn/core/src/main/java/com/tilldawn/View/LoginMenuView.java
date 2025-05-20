@@ -28,8 +28,8 @@ public class LoginMenuView implements Screen {
         this.viewTitle = new Label("Login Menu", skin);
         this.usernameLabel = new Label("Username:", skin);
         this.passwordLabel = new Label("Password:", skin);
-        this.usernameTextField = new TextField("", skin);
-        this.passwordTextField = new TextField("", skin);
+        this.usernameTextField = new TextField("parsa", skin);
+        this.passwordTextField = new TextField("Par3A#!fa", skin);
         this.forgetPasswordButton = new TextButton("Forgot Password", skin);
         this.loginButton = new TextButton("Login Menu", skin);
         this.errorLabel = new Label("", skin);

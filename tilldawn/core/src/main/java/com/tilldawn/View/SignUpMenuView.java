@@ -32,14 +32,14 @@ public class SignUpMenuView implements Screen {
         this.viewTitle = new Label("SignUp Menu", skin);
         this.usernameLabel = new Label("Username:", skin);
         this.passwordLabel = new Label("Password:", skin);
-        this.usernameTextField = new TextField("", skin);
-        this.passwordTextField = new TextField("", skin);
+        this.usernameTextField = new TextField("parsa", skin);
+        this.passwordTextField = new TextField("Par3A#!fa", skin);
         this.GuestButton = new TextButton("Guest User", skin);
         this.securityQuestions = new SelectBox<>(skin);
         this.securityQuestions.setItems(new Array<>(new String[]{"1.What was the name of your first car?",
             "2.What city were you born in?",
             "3.What is your favorite teacher’s name?"}));
-        this.securityAnswerTextField = new TextField("", skin);
+        this.securityAnswerTextField = new TextField("aaa", skin);
         this.signUpButton = new TextButton("Sign Up", skin);
         this.loginButton = new TextButton("Login Menu", skin);
         this.errorLabel = new Label("", skin);

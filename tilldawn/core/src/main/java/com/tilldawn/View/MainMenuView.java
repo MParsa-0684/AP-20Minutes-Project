@@ -103,7 +103,7 @@ public class MainMenuView implements Screen {
         table.add(rightColumn).pad(20).top().right();
         table.row();
         table.add(errorLabel).colspan(2).row();
-        //Par3A#!fa
+        //
     }
 
     @Override
