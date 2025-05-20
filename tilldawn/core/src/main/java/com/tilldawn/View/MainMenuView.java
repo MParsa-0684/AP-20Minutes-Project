@@ -1,24 +1,119 @@
 package com.tilldawn.View;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.Scaling;
+import com.badlogic.gdx.utils.ScreenUtils;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.tilldawn.Control.MainMenuController;
+import com.tilldawn.Main;
+import com.tilldawn.Model.App;
 
 public class MainMenuView implements Screen {
+    private Stage stage;
     private MainMenuController controller;
+    private final Label titleLabel;
+    private final TextButton settingsButton;
+    private final TextButton profileButton;
+    private final TextButton preGameButton;
+    private final TextButton scoreButton;
+    private final TextButton hintButton;
+    private final TextButton loadGameButton;
+    private final TextButton exitButton;
+    private final Label userNameLabel;
+    private final Label scoreLabel;
+    private Table table;
+
 
     public MainMenuView(MainMenuController controller, Skin skin) {
-        // Constructor for MainMenuController
+        this.table = new Table();
+        this.controller = controller;
+        this.titleLabel = new Label("Main Menu", skin);
+        this.settingsButton = new TextButton("Settings", skin);
+        this.profileButton = new TextButton("Profile", skin);
+        this.preGameButton = new TextButton("Pre-Game", skin);
+        this.scoreButton = new TextButton("Score Board", skin);
+        this.hintButton = new TextButton("Hint Menu", skin);
+        this.loadGameButton = new TextButton("Load Game", skin);
+        this.exitButton = new TextButton("Exit Account", skin);
+        this.userNameLabel = new Label(App.getCurrentUser().getUsername(), skin);
+        this.scoreLabel = new Label(String.valueOf(App.getCurrentUser().getScore()), skin);
+
+        controller.setView(this);
     }
 
     @Override
     public void show() {
+        stage = new Stage(new ScreenViewport());
+        Gdx.input.setInputProcessor(stage);
 
+        Table table = new Table();
+        table.setFillParent(true);
+        table.center();
+        stage.addActor(table);
+
+        stage = new Stage(new ScreenViewport());
+        Gdx.input.setInputProcessor(stage);
+
+        table = new Table();
+        table.setFillParent(true);
+        stage.addActor(table);
+
+        stage = new Stage(new ScreenViewport());
+        Gdx.input.setInputProcessor(stage);
+
+        table = new Table();
+        table.setFillParent(true);
+        table.center();
+        stage.addActor(table);
+
+// LEFT COLUMN (buttons)
+        Table leftColumn = new Table();
+        leftColumn.defaults().pad(10).fillX();
+
+        leftColumn.add(settingsButton).row();
+        leftColumn.add(profileButton).row();
+        leftColumn.add(preGameButton).row();
+        leftColumn.add(scoreButton).row();
+        leftColumn.add(hintButton).row();
+
+// RIGHT COLUMN (labels + exit)
+        Table rightColumn = new Table();
+        rightColumn.defaults().pad(10).fillX();
+
+        rightColumn.row();
+        Sprite sprite = App.getCurrentUser().getAvatar().getSprites().get(0).get(0);
+        Image avatarImage = new Image(new TextureRegionDrawable(new TextureRegion(sprite)));
+        avatarImage.setSize(sprite.getWidth(), sprite.getHeight());
+        avatarImage.setScaling(Scaling.none);
+        rightColumn.add(avatarImage).center().row();
+        rightColumn.add(userNameLabel).row();
+        rightColumn.add(scoreLabel).row();
+        rightColumn.add(loadGameButton).row();
+        rightColumn.add(exitButton).row();
+
+// Add both columns to main centered table
+        titleLabel.setFontScale(3);
+        table.add(titleLabel).colspan(2).row();
+        table.add(leftColumn).pad(20).top().left();
+        table.add(rightColumn).pad(20).top().right();
+
+        //Par3A#!fa
     }
 
     @Override
     public void render(float v) {
-
+        ScreenUtils.clear(35 / 255f, 29 / 255f, 42 / 255f, 1);
+        Main.getBatch().begin();
+        Main.getBatch().end();
+        stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
+        stage.draw();
+        controller.handleMainMenu();
     }
 
     @Override

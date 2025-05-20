@@ -44,6 +44,7 @@ public class SignUpMenuView implements Screen {
         this.loginButton = new TextButton("Login Menu", skin);
         this.errorLabel = new Label("", skin);
 
+
         controller.setView(this);
     }
 

@@ -31,4 +31,8 @@ public class Avatar {
         }
         return sprites;
     }
+
+    public ArrayList<ArrayList<Sprite>> getSprites() {
+        return sprites;
+    }
 }
