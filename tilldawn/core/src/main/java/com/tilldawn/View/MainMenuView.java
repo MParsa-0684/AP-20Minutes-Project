@@ -101,7 +101,7 @@ public class MainMenuView implements Screen {
         table.add(leftColumn).pad(20).top().left();
         table.add(rightColumn).pad(20).top().right();
         table.row();
-        table.add(errorLabel).colspan(2).row();
+        table.add(errorLabel).colspan(2);
 
     }
 

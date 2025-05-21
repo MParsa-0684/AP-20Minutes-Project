@@ -2,12 +2,19 @@ package com.tilldawn.View;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.tilldawn.Control.SettingsMenuController;
 import com.tilldawn.Main;
+import com.tilldawn.Model.App;
+import com.tilldawn.Model.Avatars;
 
 public class SettingsMenuView implements Screen {
     private Stage stage;
@@ -26,6 +33,7 @@ public class SettingsMenuView implements Screen {
     private CheckBox autoReloadCheckBox;
     private Label gameThemeLabel;
     private CheckBox gameThemeCheckBox;
+    private TextButton backButton;
 
 
     public SettingsMenuView(SettingsMenuController controller, Skin skin) {
@@ -40,19 +48,39 @@ public class SettingsMenuView implements Screen {
         musicLabel = new Label("Music Track", skin);
         musicSelectBox = new SelectBox<>(skin);
         musicSelectBox.setItems("Pretty Dungeon LOOP", "Wasteland Combat Loop");
+        musicSelectBox.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeListener.ChangeEvent event, Actor actor) {
+                String selected = musicSelectBox.getSelected();
+                float volume = App.getBackgroundMusic().getVolume();
+                if(App.getBackgroundMusic() != null)
+                    App.getBackgroundMusic().dispose();
+                App.setBackgroundMusic(Gdx.audio.newMusic(Gdx.files.internal("AudioClip/" + selected + ".wav")));
+                App.getBackgroundMusic().setLooping(true);
+                App.getBackgroundMusic().setVolume(volume);
+                App.getBackgroundMusic().play();
+            }
+        });
 
         sfxLabel = new Label("Sound Effects", skin);
         sfxButton = new CheckBox("", skin);
+        if(App.getCurrentUser().getPreGame().isSfxMusic())
+            sfxButton.setChecked(true);
 
         gameKeysLabel = new Label("Key Bindings", skin);
-        gameKeysButtons = new TextField("", skin);
+        gameKeysButtons = new TextField(App.getCurrentUser().getPreGame().getGameKeys(), skin);
 
         autoReloadLabel = new Label("Auto Reload", skin);
         autoReloadCheckBox = new CheckBox("", skin);
+        if(App.getCurrentUser().getPreGame().isAutoReload())
+            autoReloadCheckBox.setChecked(true);
 
         gameThemeLabel = new Label("Black & White Mode", skin);
         gameThemeCheckBox = new CheckBox("", skin);
+        if(App.getCurrentUser().getPreGame().getGameColor() == Color.BLACK)
+            gameThemeCheckBox.setChecked(true);
 
+        backButton = new TextButton("Back", skin);
         controller.setView(this);
     }
 
@@ -106,7 +134,8 @@ public class SettingsMenuView implements Screen {
         gameThemeLabel.setFontScale(1.5f);
         table.add(gameThemeLabel).left().padRight(10);
         table.add(gameThemeCheckBox).left();
-        table.row().padTop(30);;
+        table.row().padTop(30);
+        table.add(backButton).colspan(2).width(250);
 
         stage.addActor(table);
     }
@@ -144,5 +173,33 @@ public class SettingsMenuView implements Screen {
     @Override
     public void dispose() {
 
+    }
+
+    public SelectBox<String> getMusicSelectBox() {
+        return musicSelectBox;
+    }
+
+    public Slider getVolumeSlider() {
+        return volumeSlider;
+    }
+
+    public CheckBox getSfxButton() {
+        return sfxButton;
+    }
+
+    public TextField getGameKeysButtons() {
+        return gameKeysButtons;
+    }
+
+    public CheckBox getAutoReloadCheckBox() {
+        return autoReloadCheckBox;
+    }
+
+    public CheckBox getGameThemeCheckBox() {
+        return gameThemeCheckBox;
+    }
+
+    public TextButton getBackButton() {
+        return backButton;
     }
 }

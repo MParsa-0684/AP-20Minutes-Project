@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.tilldawn.Control.SignUpMenuController;
+import com.tilldawn.Model.App;
 import com.tilldawn.Model.GameAssetManager;
 import com.tilldawn.View.SignUpMenuView;
 
@@ -17,16 +18,15 @@ import com.tilldawn.View.SignUpMenuView;
 public class Main extends Game {
     private static Main main;
     private static SpriteBatch batch;
-    private static Music backgroundMusic;
 
     @Override
     public void create() {
         main = this;
         batch = new SpriteBatch();
-        backgroundMusic = Gdx.audio.newMusic(Gdx.files.internal("AudioClip/Pretty Dungeon LOOP.wav"));
-        backgroundMusic.setLooping(true);
-        backgroundMusic.setVolume(0.5f);
-        backgroundMusic.play();
+        App.setBackgroundMusic(Gdx.audio.newMusic(Gdx.files.internal("AudioClip/Pretty Dungeon LOOP.wav")));
+        App.getBackgroundMusic().setLooping(true);
+        App.getBackgroundMusic().setVolume(0.5f);
+        App.getBackgroundMusic().play();
         main.setScreen(new SignUpMenuView(new SignUpMenuController(), GameAssetManager.getGameAssetManager().getMenuSkin()));
     }
 
@@ -37,8 +37,8 @@ public class Main extends Game {
 
     @Override
     public void dispose() {
-        if(backgroundMusic != null) {
-            backgroundMusic.dispose();
+        if(App.getBackgroundMusic() != null) {
+            App.getBackgroundMusic().dispose();
         }
 
         batch.dispose();
@@ -54,9 +54,5 @@ public class Main extends Game {
 
     public static SpriteBatch getBatch() {
         return batch;
-    }
-
-    public static Music getBackgroundMusic() {
-        return backgroundMusic;
     }
 }

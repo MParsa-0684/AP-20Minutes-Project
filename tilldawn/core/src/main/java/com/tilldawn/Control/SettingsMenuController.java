@@ -1,5 +1,11 @@
 package com.tilldawn.Control;
 
+import com.badlogic.gdx.graphics.Color;
+import com.tilldawn.Main;
+import com.tilldawn.Model.App;
+import com.tilldawn.Model.GameAssetManager;
+import com.tilldawn.View.GameMenuView;
+import com.tilldawn.View.MainMenuView;
 import com.tilldawn.View.SettingsMenuView;
 
 public class SettingsMenuController {
@@ -17,6 +23,17 @@ public class SettingsMenuController {
         if(view == null)
             return;
 
-
+        if(view.getBackButton().isChecked()) {
+            view.getBackButton().setChecked(false);
+            Main.getMain().getScreen().dispose();
+            Main.getMain().setScreen(new MainMenuView(new MainMenuController(), GameAssetManager.getGameAssetManager().getMenuSkin()));
+        }
+        else if(view.getVolumeSlider().isDragging()) {
+            App.getBackgroundMusic().setVolume(view.getVolumeSlider().getValue());
+        }
+        App.getCurrentUser().getPreGame().setSfxMusic(view.getSfxButton().isChecked());
+        App.getCurrentUser().getPreGame().setAutoReload(view.getAutoReloadCheckBox().isChecked());
+        App.getCurrentUser().getPreGame().setGameColor((view.getGameThemeCheckBox().isChecked()) ? Color.BLACK : Color.WHITE);
+        App.getCurrentUser().getPreGame().setGameKeys(view.getGameKeysButtons().getText());
     }
 }

@@ -13,6 +13,7 @@ public class User {
     private Sprite currentSprite;
     private int killCount;
     private int maxTimeSpent;
+    private PreGame preGame;
 
     public User(String username, String password, String securityQuestion, String securityAnswer, Avatar avatar) {
         this.username = username;
@@ -25,6 +26,7 @@ public class User {
         this.score = 0;
         this.killCount = 0;
         this.maxTimeSpent = 0;
+        this.preGame = new PreGame();
     }
 
     public String getUsername() {
@@ -93,5 +95,9 @@ public class User {
 
     public int getMaxTimeSpent() {
         return maxTimeSpent;
+    }
+
+    public PreGame getPreGame() {
+        return preGame;
     }
 }

@@ -45,7 +45,7 @@ public class MainMenuController {
             Main.getMain().getScreen().dispose();
             Main.getMain().setScreen(new HintTalentMenuView(new HintTalentMenuController(), GameAssetManager.getGameAssetManager().getMenuSkin()));
         }
-        else if(view.getHintButton().isChecked()) {
+        else if(view.getLoadGameButton().isChecked()) {
             view.getHintButton().setChecked(false);
             if(App.getCurrentUser().getGame() != null) {
                 App.setCurrentGame(App.getCurrentUser().getGame());
