@@ -3,6 +3,7 @@ package com.tilldawn.Model;
 import com.badlogic.gdx.audio.Music;
 
 public class Game {
+    private World world;
     private PreGame preGame;
     private int gameTime;
     private Player player;
@@ -11,6 +12,7 @@ public class Game {
         this.preGame = preGame;
         this.gameTime = gameTime;
         this.player = player;
+        this.world = new World();
     }
 
     public PreGame getPreGame() {
@@ -23,5 +25,9 @@ public class Game {
 
     public Player getPlayer() {
         return player;
+    }
+
+    public World getWorld() {
+        return world;
     }
 }

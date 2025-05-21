@@ -19,6 +19,7 @@ public enum EnemyType {
     private int HP;
     private int spawnRate;
     private ArrayList<Texture> Textures;
+    private CollisionRect collisionRect;
 
     EnemyType(String name, int triggerTime, int HP, int spawnRate, ArrayList<Texture> textures) {
         this.name = name;

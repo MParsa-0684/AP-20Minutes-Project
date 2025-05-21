@@ -50,7 +50,7 @@ public class MainMenuController {
             if(App.getCurrentUser().getGame() != null) {
                 App.setCurrentGame(App.getCurrentUser().getGame());
                 Main.getMain().getScreen().dispose();
-                Main.getMain().setScreen(new GameMenuView(new GameMenuController(), GameAssetManager.getGameAssetManager().getMenuSkin()));
+                Main.getMain().setScreen(new GameView(new GameController(), GameAssetManager.getGameAssetManager().getMenuSkin()));
             }
             else {
                 view.getErrorLabel().setText("You don't have any saved game!");

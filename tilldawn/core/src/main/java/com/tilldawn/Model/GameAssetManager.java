@@ -187,6 +187,10 @@ public class GameAssetManager {
         new Texture("Sprite/ElderBrain/ElderBrain.png")
     ));
 
+    private final Texture map = new Texture("Sprite/Map/Map.png");
+
+    private final Texture bullet = new Texture("Sprite/Icon/Icon_Bullet_Storm.png");
+
 
 
     public static GameAssetManager getGameAssetManager() {
@@ -258,6 +262,14 @@ public class GameAssetManager {
 
     public ArrayList<Texture> getElder() {
         return elder;
+    }
+
+    public Texture getMap() {
+        return map;
+    }
+
+    public Texture getBullet() {
+        return bullet;
     }
 }
 

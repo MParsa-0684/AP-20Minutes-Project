@@ -63,4 +63,12 @@ public enum Avatar {
     public ArrayList<ArrayList<Texture>> getTextures() {
         return textures;
     }
+
+    public int getHP() {
+        return HP;
+    }
+
+    public int getSpeed() {
+        return speed;
+    }
 }

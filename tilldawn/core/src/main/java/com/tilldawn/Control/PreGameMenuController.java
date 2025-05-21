@@ -2,7 +2,7 @@ package com.tilldawn.Control;
 
 import com.tilldawn.Main;
 import com.tilldawn.Model.*;
-import com.tilldawn.View.GameMenuView;
+import com.tilldawn.View.GameView;
 import com.tilldawn.View.MainMenuView;
 import com.tilldawn.View.PreGameMenuView;
 import com.tilldawn.View.SettingsMenuView;
@@ -46,7 +46,7 @@ public class PreGameMenuController {
             App.setCurrentGame(game);
             App.getCurrentUser().setGame(game);
             Main.getMain().getScreen().dispose();
-            Main.getMain().setScreen(new GameMenuView(new GameMenuController(), GameAssetManager.getGameAssetManager().getMenuSkin()));
+            Main.getMain().setScreen(new GameView(new GameController(), GameAssetManager.getGameAssetManager().getMenuSkin()));
         }
     }
 

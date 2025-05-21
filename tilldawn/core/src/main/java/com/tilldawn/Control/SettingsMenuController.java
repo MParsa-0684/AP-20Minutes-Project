@@ -4,7 +4,6 @@ import com.badlogic.gdx.graphics.Color;
 import com.tilldawn.Main;
 import com.tilldawn.Model.App;
 import com.tilldawn.Model.GameAssetManager;
-import com.tilldawn.View.GameMenuView;
 import com.tilldawn.View.MainMenuView;
 import com.tilldawn.View.SettingsMenuView;
 
