@@ -1,5 +1,7 @@
 package com.tilldawn.Model;
 
+import com.badlogic.gdx.graphics.g2d.Sprite;
+
 public class User {
     private String username;
     private String password;
@@ -8,6 +10,7 @@ public class User {
     private Avatar avatar;
     private Game game;
     private int score;
+    private Sprite currentSprite;
 
     public User(String username, String password, String securityQuestion, String securityAnswer, Avatar avatar) {
         this.username = username;
@@ -15,6 +18,7 @@ public class User {
         this.securityQuestion = securityQuestion;
         this.securityAnswer = securityAnswer;
         this.avatar = avatar;
+        this.currentSprite = avatar.getSprites().get(0).get(0);
         this.game = null;
         this.score = 0;
     }
@@ -69,5 +73,9 @@ public class User {
 
     public int getScore() {
         return score;
+    }
+
+    public Sprite getCurrentSprite() {
+        return currentSprite;
     }
 }

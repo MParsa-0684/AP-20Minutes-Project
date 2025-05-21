@@ -87,11 +87,10 @@ public class MainMenuView implements Screen {
         rightColumn.defaults().pad(10).fillX();
 
         rightColumn.row();
-        Sprite sprite = App.getCurrentUser().getAvatar().getSprites().get(0).get(0);
+        Sprite sprite = App.getCurrentUser().getCurrentSprite();
         Image avatarImage = new Image(new TextureRegionDrawable(new TextureRegion(sprite)));
-        avatarImage.setSize(sprite.getWidth(), sprite.getHeight());
-        avatarImage.setScaling(Scaling.none);
-        rightColumn.add(avatarImage).center().row();
+
+        rightColumn.add(avatarImage).size(sprite.getWidth() * 2, sprite.getHeight() * 2).center().row();
         rightColumn.add(userNameLabel).row();
         rightColumn.add(scoreLabel).row();
         rightColumn.add(loadGameButton).row();
@@ -103,7 +102,7 @@ public class MainMenuView implements Screen {
         table.add(rightColumn).pad(20).top().right();
         table.row();
         table.add(errorLabel).colspan(2).row();
-        //
+
     }
 
     @Override

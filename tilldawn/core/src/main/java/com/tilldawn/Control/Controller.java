@@ -14,7 +14,7 @@ public class Controller {
         return null;
     }
 
-    protected Pair checkPassword(String password){
+    protected Pair<Boolean, String> checkPassword(String password){
         if(password.length() < 8)
             return new Pair<>(false, "Your password must be at least 8 characters");
 

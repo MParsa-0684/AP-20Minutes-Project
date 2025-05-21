@@ -35,4 +35,8 @@ public class Avatar {
     public ArrayList<ArrayList<Sprite>> getSprites() {
         return sprites;
     }
+
+    public String getName() {
+        return name;
+    }
 }
