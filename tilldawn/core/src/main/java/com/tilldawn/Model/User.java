@@ -11,6 +11,8 @@ public class User {
     private Game game;
     private int score;
     private Sprite currentSprite;
+    private int killCount;
+    private int maxTimeSpent;
 
     public User(String username, String password, String securityQuestion, String securityAnswer, Avatar avatar) {
         this.username = username;
@@ -21,6 +23,8 @@ public class User {
         this.currentSprite = avatar.getSprites().get(0).get(0);
         this.game = null;
         this.score = 0;
+        this.killCount = 0;
+        this.maxTimeSpent = 0;
     }
 
     public String getUsername() {
@@ -77,5 +81,17 @@ public class User {
 
     public Sprite getCurrentSprite() {
         return currentSprite;
+    }
+
+    public void setCurrentSprite(Sprite currentSprite) {
+        this.currentSprite = currentSprite;
+    }
+
+    public int getKillCount() {
+        return killCount;
+    }
+
+    public int getMaxTimeSpent() {
+        return maxTimeSpent;
     }
 }

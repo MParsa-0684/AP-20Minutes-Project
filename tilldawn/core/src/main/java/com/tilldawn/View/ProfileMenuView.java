@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -80,6 +81,7 @@ public class ProfileMenuView implements Screen {
                 String selected = avatarSelectBox.getSelected();
                 avatarPreviewImage.setDrawable(new TextureRegionDrawable(new TextureRegion(Avatars.getAvatar(selected).getSprites().get(0).get(0))));
                 App.getCurrentUser().setAvatar(Avatars.getAvatar(selected));
+                App.getCurrentUser().setCurrentSprite(Avatars.getAvatar(selected).getSprites().get(0).get(0));
             }
         });
 
@@ -101,6 +103,7 @@ public class ProfileMenuView implements Screen {
                                 App.getCurrentUser().setAvatar(new Avatar(file.getName(), new ArrayList<>(
                                     Arrays.asList(textures, textures, textures)), 4, 4)
                                 );
+                                App.getCurrentUser().setCurrentSprite(new Sprite(texture));
                             });
                         }
                     });

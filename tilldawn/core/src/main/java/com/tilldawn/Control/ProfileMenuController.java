@@ -68,8 +68,5 @@ public class ProfileMenuController extends Controller {
             Main.getMain().getScreen().dispose();
             Main.getMain().setScreen(new MainMenuView(new MainMenuController(), GameAssetManager.getGameAssetManager().getMenuSkin()));
         }
-        else if(view.getChooseFileButton().isChecked()) {
-
-        }
     }
 }

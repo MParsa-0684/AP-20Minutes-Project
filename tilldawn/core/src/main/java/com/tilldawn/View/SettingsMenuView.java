@@ -63,7 +63,6 @@ public class SettingsMenuView implements Screen {
 
         Table table = new Table();
         table.setFillParent(true);
-        table.center();
         stage.addActor(table);
         table.top().padTop(200);
         stage.addActor(table);
