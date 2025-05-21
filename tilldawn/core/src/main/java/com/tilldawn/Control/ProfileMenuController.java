@@ -1,22 +1,12 @@
 package com.tilldawn.Control;
 
-import com.badlogic.gdx.Application;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.tilldawn.Main;
 import com.tilldawn.Model.App;
-import com.tilldawn.Model.Avatar;
 import com.tilldawn.Model.GameAssetManager;
 import com.tilldawn.Model.Pair;
 import com.tilldawn.View.MainMenuView;
 import com.tilldawn.View.ProfileMenuView;
 import com.tilldawn.View.SignUpMenuView;
-
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Arrays;
 
 public class ProfileMenuController extends Controller {
     private ProfileMenuView view;

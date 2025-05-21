@@ -9,15 +9,13 @@ import com.tilldawn.View.SignUpMenuView;
 import java.util.Random;
 
 public class SignUpMenuController extends Controller {
-
-
     private Avatar getRandomAvatar(){
         Random random = new Random();
         int rand = random.nextInt(5);
         int ptr = 0;
-        for (Avatars value : Avatars.values()) {
+        for (Avatar value : Avatar.values()) {
             if(ptr == rand)
-                return value.getAvatar();
+                return value;
             ptr++;
         }
         return null;

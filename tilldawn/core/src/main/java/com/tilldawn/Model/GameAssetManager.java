@@ -136,6 +136,58 @@ public class GameAssetManager {
         }
     });
 
+    private final ArrayList<Texture> revolver = new ArrayList<>(Arrays.asList(
+        new Texture("Sprite/RevolverStill/RevolverStill.png"),
+        new Texture("Sprite/RevolverReload/RevolverReload_0.png"),
+        new Texture("Sprite/RevolverReload/RevolverReload_1.png"),
+        new Texture("Sprite/RevolverReload/RevolverReload_2.png"),
+        new Texture("Sprite/RevolverReload/RevolverReload_3.png")
+    ));
+
+    private final ArrayList<Texture> shotgun = new ArrayList<>(Arrays.asList(
+        new Texture("Sprite/T/T_Shotgun_SS_0.png"),
+        new Texture("Sprite/T/T_Shotgun_SS_1.png"),
+        new Texture("Sprite/T/T_Shotgun_SS_2.png"),
+        new Texture("Sprite/T/T_Shotgun_SS_3.png")
+    ));
+
+    private final ArrayList<Texture> smgDual = new ArrayList<>(Arrays.asList(
+        new Texture("Sprite/T/T_DualSMGs_Icon.png"),
+        new Texture("Sprite/SMGReload/SMGReload_0.png"),
+        new Texture("Sprite/SMGReload/SMGReload_1.png"),
+        new Texture("Sprite/SMGReload/SMGReload_2.png"),
+        new Texture("Sprite/SMGReload/SMGReload_3.png")
+    ));
+
+    private final ArrayList<Texture> tree = new ArrayList<>(Arrays.asList(
+        new Texture("Sprite/T/T_TreeMonster_0.png"),
+        new Texture("Sprite/T/T_TreeMonster_1.png"),
+        new Texture("Sprite/T/T_TreeMonster_2.png")
+    ));
+
+    private final ArrayList<Texture> tentacle_monster = new ArrayList<>(Arrays.asList(
+        new Texture("Sprite/TentacleIdle/TentacleIdle0.png"),
+        new Texture("Sprite/TentacleIdle/TentacleIdle1.png"),
+        new Texture("Sprite/TentacleIdle/TentacleIdle2.png"),
+        new Texture("Sprite/TentacleIdle/TentacleIdle3.png"),
+        new Texture("Sprite/TentacleSpawn/TentacleSpawn0.png"),
+        new Texture("Sprite/TentacleSpawn/TentacleSpawn1.png"),
+        new Texture("Sprite/TentacleSpawn/TentacleSpawn2.png"),
+        new Texture("Sprite/TentacleAttack/TentacleAttack.png")
+    ));
+
+    private final ArrayList<Texture> eyebat = new ArrayList<>(Arrays.asList(
+        new Texture("Sprite/T/T_EyeBat_0.png"),
+        new Texture("Sprite/T/T_EyeBat_1.png"),
+        new Texture("Sprite/T/T_EyeBat_2.png"),
+        new Texture("Sprite/T/T_EyeBat_3.png")
+    ));
+
+    private final ArrayList<Texture> elder = new ArrayList<>(Arrays.asList(
+        new Texture("Sprite/ElderBrain/ElderBrain.png")
+    ));
+
+
 
     public static GameAssetManager getGameAssetManager() {
         if(gameAssetManager == null) {
@@ -179,4 +231,33 @@ public class GameAssetManager {
     public ArrayList<ArrayList<Texture>> getDasherTextures() {
         return dasher;
     }
+
+    public ArrayList<Texture> getTree() {
+        return tree;
+    }
+
+    public ArrayList<Texture> getRevolver() {
+        return revolver;
+    }
+
+    public ArrayList<Texture> getShotgun() {
+        return shotgun;
+    }
+
+    public ArrayList<Texture> getSmgDual() {
+        return smgDual;
+    }
+
+    public ArrayList<Texture> getTentacle_monster() {
+        return tentacle_monster;
+    }
+
+    public ArrayList<Texture> getEyebat() {
+        return eyebat;
+    }
+
+    public ArrayList<Texture> getElder() {
+        return elder;
+    }
 }
+

@@ -20,7 +20,6 @@ import com.tilldawn.Control.ProfileMenuController;
 import com.tilldawn.Main;
 import com.tilldawn.Model.App;
 import com.tilldawn.Model.Avatar;
-import com.tilldawn.Model.Avatars;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -79,9 +78,9 @@ public class ProfileMenuView implements Screen {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
                 String selected = avatarSelectBox.getSelected();
-                avatarPreviewImage.setDrawable(new TextureRegionDrawable(new TextureRegion(Avatars.getAvatar(selected).getSprites().get(0).get(0))));
-                App.getCurrentUser().setAvatar(Avatars.getAvatar(selected));
-                App.getCurrentUser().setCurrentSprite(Avatars.getAvatar(selected).getSprites().get(0).get(0));
+                avatarPreviewImage.setDrawable(new TextureRegionDrawable(new TextureRegion(Avatar.getAvatar(selected).getSprites().get(0).get(0))));
+                App.getCurrentUser().setAvatar(Avatar.getAvatar(selected));
+                App.getCurrentUser().setCurrentSprite(Avatar.getAvatar(selected).getSprites().get(0).get(0));
             }
         });
 
@@ -100,9 +99,8 @@ public class ProfileMenuView implements Screen {
                                 Texture texture = new Texture(Gdx.files.absolute(file.getAbsolutePath()));
                                 ArrayList<Texture> textures = new ArrayList<>(Arrays.asList(texture));
                                 avatarPreviewImage.setDrawable(new TextureRegionDrawable(new TextureRegion(texture)));
-                                App.getCurrentUser().setAvatar(new Avatar(file.getName(), new ArrayList<>(
-                                    Arrays.asList(textures, textures, textures)), 4, 4)
-                                );
+                                App.getCurrentUser().setAvatar(Avatar.CUSTOM);
+                                App.getCurrentUser().getAvatar().setTextures(new ArrayList<>(Arrays.asList(textures, textures, textures)));
                                 App.getCurrentUser().setCurrentSprite(new Sprite(texture));
                             });
                         }
