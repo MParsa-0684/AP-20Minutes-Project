@@ -48,5 +48,12 @@ public class PreGame {
         this.gameColor = gameColor;
     }
 
-
+    public PreGame copy() {
+        PreGame preGame = new PreGame();
+        preGame.setSfxMusic(sfxMusic);
+        preGame.setGameKeys(gameKeys);
+        preGame.setAutoReload(autoReload);
+        preGame.setGameColor(gameColor);
+        return preGame;
+    }
 }

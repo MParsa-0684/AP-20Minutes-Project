@@ -183,4 +183,8 @@ public class GameView implements Screen, InputProcessor {
     public Game getGame() {
         return game;
     }
+
+    public TextButton getPauseButton() {
+        return pauseButton;
+    }
 }

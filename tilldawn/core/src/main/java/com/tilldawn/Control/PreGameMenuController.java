@@ -36,7 +36,7 @@ public class PreGameMenuController {
         else if(view.getGameButton().isChecked()) {
             view.getGameButton().setChecked(false);
             Game game = new Game(
-                App.getCurrentUser().getPreGame(),
+                App.getCurrentUser().getPreGame().copy(),
                 Integer.parseInt(view.getTimeSelectBox().getSelected()),
                 new Player(
                     App.getCurrentUser().getAvatar(),

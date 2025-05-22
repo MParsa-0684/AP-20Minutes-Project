@@ -64,7 +64,7 @@ public class WeaponController {
         float weaponCenterY = App.getCurrentGame().getPlayer().getPosition().y;
 
         float angle = (float) Math.atan2(y - weaponCenterY, x - weaponCenterX);
-        weapon.getSprite().setRotation((float) (3.14 - angle * MathUtils.radiansToDegrees));
+        weapon.getSprite().setRotation((float) (Math.PI - angle * MathUtils.radiansToDegrees));
     }
 
     public void reloadAnimation() {

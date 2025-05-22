@@ -1,5 +1,6 @@
 package com.tilldawn.Control;
 
+import com.badlogic.gdx.Gdx;
 import com.tilldawn.Main;
 import com.tilldawn.Model.App;
 import com.tilldawn.Model.GameAssetManager;
@@ -49,9 +50,18 @@ public class MainMenuController {
             view.getHintButton().setChecked(false);
             if(App.getCurrentUser().getGameView() != null) {
                 App.setCurrentGame(App.getCurrentUser().getGameView());
+
+                float volume = App.getBackgroundMusic().getVolume();
+                if(App.getBackgroundMusic() != null)
+                    App.getBackgroundMusic().dispose();
+                App.setBackgroundMusic(Gdx.audio.newMusic(Gdx.files.internal("AudioClip/Wasteland Combat Loop.wav")));
+                App.getBackgroundMusic().setLooping(true);
+                App.getBackgroundMusic().setVolume(volume);
+                App.getBackgroundMusic().play();
+
+
                 Main.getMain().getScreen().dispose();
-//                Main.getMain().setScreen(new GameView(new GameController(), GameAssetManager.getGameAssetManager().getMenuSkin(),
-//                    App.getCurrentUser().getGameView()));
+                Main.getMain().setScreen(App.getCurrentUser().getGameView());
             }
             else {
                 view.getErrorLabel().setText("You don't have any saved game!");
