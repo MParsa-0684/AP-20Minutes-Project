@@ -59,12 +59,6 @@ public class Weapon {
         this.reloadTimer = reloadTimer;
     }
 
-    public void setSprite() {
-        this.sprite = new Sprite(type.getTextures().get(0));
-        this.sprite.setPosition((float) Gdx.graphics.getWidth() / 2 + 12, (float) Gdx.graphics.getHeight() / 2 + 10);
-        this.sprite.setSize(50, 50);
-    }
-
     public boolean isReloading() {
         return reloading;
     }

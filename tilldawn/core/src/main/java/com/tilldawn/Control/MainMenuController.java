@@ -47,10 +47,11 @@ public class MainMenuController {
         }
         else if(view.getLoadGameButton().isChecked()) {
             view.getHintButton().setChecked(false);
-            if(App.getCurrentUser().getGame() != null) {
-                App.setCurrentGame(App.getCurrentUser().getGame());
+            if(App.getCurrentUser().getGameView() != null) {
+                App.setCurrentGame(App.getCurrentUser().getGameView());
                 Main.getMain().getScreen().dispose();
-                Main.getMain().setScreen(new GameView(new GameController(), GameAssetManager.getGameAssetManager().getMenuSkin()));
+//                Main.getMain().setScreen(new GameView(new GameController(), GameAssetManager.getGameAssetManager().getMenuSkin(),
+//                    App.getCurrentUser().getGameView()));
             }
             else {
                 view.getErrorLabel().setText("You don't have any saved game!");

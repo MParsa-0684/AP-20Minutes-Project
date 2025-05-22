@@ -52,10 +52,8 @@ public class PreGameMenuController {
             App.getBackgroundMusic().setVolume(volume);
             App.getBackgroundMusic().play();
 
-            App.setCurrentGame(game);
-            App.getCurrentUser().setGame(game);
             Main.getMain().getScreen().dispose();
-            Main.getMain().setScreen(new GameView(new GameController(), GameAssetManager.getGameAssetManager().getMenuSkin()));
+            Main.getMain().setScreen(new GameView(GameAssetManager.getGameAssetManager().getMenuSkin(), game));
         }
     }
 

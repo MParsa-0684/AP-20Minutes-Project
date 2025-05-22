@@ -28,4 +28,8 @@ public enum EnemyType {
         this.spawnRate = spawnRate;
         Textures = textures;
     }
+
+    public ArrayList<Texture> getTextures() {
+        return Textures;
+    }
 }

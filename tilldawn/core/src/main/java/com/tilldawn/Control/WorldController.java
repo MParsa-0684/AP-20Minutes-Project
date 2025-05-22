@@ -5,16 +5,13 @@ import com.tilldawn.Model.App;
 import com.tilldawn.Model.World;
 
 public class WorldController {
-    private PlayerController playerController;
     private World world;
 
-    public WorldController(PlayerController playerController) {
-        world = App.getCurrentGame().getWorld();
-        this.playerController = playerController;
+    public WorldController() {
+        world = new World();
     }
 
     public void update() {
-        world.setPos(playerController.getPlayer().getPosition().cpy());
-        Main.getBatch().draw(world.getTexture(), world.getPos().x -3104, world.getPos().y - 1992);
+        Main.getBatch().draw(world.getTexture(), world.getPos().x, world.getPos().y);
     }
 }

@@ -1,6 +1,7 @@
 package com.tilldawn.Model;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.tilldawn.View.GameView;
 
 public class User {
     private String username;
@@ -8,7 +9,7 @@ public class User {
     private String securityQuestion;
     private String securityAnswer;
     private Avatar avatar;
-    private Game game;
+    private GameView gameView;
     private int score;
     private Sprite currentSprite;
     private int killCount;
@@ -22,7 +23,7 @@ public class User {
         this.securityAnswer = securityAnswer;
         this.avatar = avatar;
         this.currentSprite = avatar.getSprites().get(0).get(0);
-        this.game = null;
+        this.gameView = null;
         this.score = 0;
         this.killCount = 0;
         this.maxTimeSpent = 0;
@@ -69,12 +70,12 @@ public class User {
         this.avatar = avatar;
     }
 
-    public Game getGame() {
-        return game;
+    public GameView getGameView() {
+        return gameView;
     }
 
-    public void setGame(Game game) {
-        this.game = game;
+    public void setGameView(GameView gameView) {
+        this.gameView = gameView;
     }
 
     public int getScore() {

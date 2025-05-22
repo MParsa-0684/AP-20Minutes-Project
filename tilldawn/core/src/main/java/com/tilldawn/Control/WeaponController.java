@@ -26,6 +26,8 @@ public class WeaponController {
     }
 
     public void update() {
+        weapon.getSprite().setPosition(App.getCurrentGame().getPlayer().getPosition().x + 12,
+            App.getCurrentGame().getPlayer().getPosition().y + 10);
         weapon.getSprite().draw(Main.getBatch());
 
         handlePlayerInput();
@@ -58,8 +60,8 @@ public class WeaponController {
     }
 
     public void handleWeaponRotation(int x, int y) {
-        float weaponCenterX = (float) Gdx.graphics.getWidth() / 2;
-        float weaponCenterY = (float) Gdx.graphics.getHeight() / 2;
+        float weaponCenterX = App.getCurrentGame().getPlayer().getPosition().x;
+        float weaponCenterY = App.getCurrentGame().getPlayer().getPosition().y;
 
         float angle = (float) Math.atan2(y - weaponCenterY, x - weaponCenterX);
         weapon.getSprite().setRotation((float) (3.14 - angle * MathUtils.radiansToDegrees));
@@ -116,8 +118,11 @@ public class WeaponController {
         Enemy closestEnemy = null;
 
         for (Enemy enemy : enemies) {
-            Vector2 vector = new Vector2(App.getCurrentGame().getPlayer().getPosition().x - enemy.getPosition().x
-                , App.getCurrentGame().getPlayer().getPosition().y - enemy.getPosition().y);
+            if(enemy.getEnemyType() == EnemyType.TREE)
+                continue;
+
+            Vector2 vector = new Vector2(enemy.getPosition().x - App.getCurrentGame().getPlayer().getPosition().x
+                , enemy.getPosition().y - App.getCurrentGame().getPlayer().getPosition().y);
 
             vectors.add(vector);
             if(vector.len() < minVector.len()) {
@@ -140,26 +145,13 @@ public class WeaponController {
     public void handleWeaponBullets() {
         for(Bullet b : playerBullets) {
             b.getSprite().draw(Main.getBatch());
-            Vector2 direction = new Vector2(
-                Gdx.graphics.getWidth()/2f - b.getPosition().x,
-                Gdx.graphics.getHeight()/2f - b.getPosition().y
-            ).nor();
 
-            b.getSprite().setX(b.getSprite().getX() - direction.x * 5);
-            b.getSprite().setY(b.getSprite().getY() + direction.y * 5);
+            b.getSprite().setX(b.getSprite().getX() + b.getDirection().x * 5);
+            b.getSprite().setY(b.getSprite().getY() - b.getDirection().y * 5);
         }
     }
 
     public void handleEnemyBullets() {
-        for(Bullet b : enemyBullets) {
-            b.getSprite().draw(Main.getBatch());
-            Vector2 direction = new Vector2(
-                Gdx.graphics.getWidth()/2f - b.getPosition().x,
-                Gdx.graphics.getHeight()/2f - b.getPosition().y
-            ).nor();
 
-            b.getSprite().setX(b.getSprite().getX() + direction.x * 5);
-            b.getSprite().setY(b.getSprite().getY() - direction.y * 5);
-        }
     }
 }

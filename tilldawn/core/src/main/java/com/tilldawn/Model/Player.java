@@ -16,9 +16,13 @@ public class Player {
     private boolean isIdle;
     private boolean isWalking;
     private boolean isRunning;
-    Vector2 position;
+    private Vector2 position;
     private ArrayList<Ability> abilities;
     private float time;
+    private int level;
+    private boolean invincible;
+    private float invincibleTime;
+    private int xp;
 
     public Player(Avatar avatar, Weapon weapon) {
         this.avatar = avatar;
@@ -35,6 +39,10 @@ public class Player {
         this.position = new Vector2((float) Gdx.graphics.getWidth() / 2, (float) Gdx.graphics.getHeight() / 2);
         this.abilities = new ArrayList<>();
         this.time = 0;
+        this.level = 1;
+        this.invincible = false;
+        this.invincibleTime = 0;
+        this.xp = 0;
     }
 
     public Avatar getAvatar() {
@@ -92,4 +100,53 @@ public class Player {
     public void setTime(float time) {
         this.time = time;
     }
+
+    public CollisionRect getCollisionRect() {
+        return collisionRect;
+    }
+
+    public void update(Vector2 difference) {
+        this.getPosition().set(this.getPosition().x + difference.x, this.getPosition().y + difference.y);
+        this.sprite.setPosition(this.getPosition().x, this.getPosition().y);
+        this.getCollisionRect().update(this.getSprite().getX(),
+            this.getSprite().getY(), this.getSprite().getWidth(), this.getSprite().getHeight());
+    }
+
+    public void decreaseHealth(int amount) {
+        health -= amount;
+    }
+
+    public boolean isInvincible() {
+        return invincible;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    public void setInvincible(boolean invincible) {
+        this.invincible = invincible;
+    }
+
+    public float getInvincibleTime() {
+        return invincibleTime;
+    }
+
+    public void setInvincibleTime(float invincibleTime) {
+        this.invincibleTime = invincibleTime;
+    }
+
+    public int getXp() {
+        return xp;
+    }
+
+    public void setXp(int xp) {
+        this.xp = xp;
+    }
+
+
 }

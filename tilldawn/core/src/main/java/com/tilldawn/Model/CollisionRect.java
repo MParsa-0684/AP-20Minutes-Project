@@ -15,7 +15,22 @@ public class CollisionRect {
         this.y = y;
     }
 
-    public boolean collidesWith(CollisionRect rect){
-        return x < rect.x + rect.width && y < rect.y + rect.height && x + width > rect.x && y + height > rect.y;
+    public void update(float x, float y, float width, float height){
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
     }
+
+    public boolean hasIntersect(CollisionRect collisionRect){
+        for (float i = this.x; i < this.x + this.width; i++){
+            for (float j = this.y; j < this.y + this.height; j++){
+                if(Math.abs(i - collisionRect.x) < collisionRect.width && Math.abs(j - collisionRect.y) < collisionRect.height){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
 }

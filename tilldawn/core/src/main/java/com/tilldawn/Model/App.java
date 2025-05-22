@@ -2,6 +2,7 @@ package com.tilldawn.Model;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
+import com.tilldawn.View.GameView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -10,7 +11,7 @@ public class App {
     private static Music backgroundMusic;
     private static final ArrayList<User> users = new ArrayList<>();
     private static User currentUser = null;
-    private static Game currentGame = null;
+    private static GameView currentGameView = null;
 
 
     public static User getCurrentUser() {
@@ -26,11 +27,11 @@ public class App {
     }
 
     public static Game getCurrentGame() {
-        return currentGame;
+        return currentGameView.getGame();
     }
 
-    public static void setCurrentGame(Game currentGame) {
-        App.currentGame = currentGame;
+    public static void setCurrentGame(GameView currentGameView) {
+        App.currentGameView = currentGameView;
     }
 
     public static Music getBackgroundMusic() {
