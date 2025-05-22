@@ -1,5 +1,6 @@
 package com.tilldawn.Control;
 
+import com.badlogic.gdx.Gdx;
 import com.tilldawn.Main;
 import com.tilldawn.Model.*;
 import com.tilldawn.View.GameView;
@@ -39,9 +40,17 @@ public class PreGameMenuController {
                 Integer.parseInt(view.getTimeSelectBox().getSelected()),
                 new Player(
                     App.getCurrentUser().getAvatar(),
-                    Weapon.valueOf(view.getWeaponSelectBox().getSelected())
+                    new Weapon(WeaponType.valueOf(view.getWeaponSelectBox().getSelected()))
                 )
             );
+
+            float volume = App.getBackgroundMusic().getVolume();
+            if(App.getBackgroundMusic() != null)
+                App.getBackgroundMusic().dispose();
+            App.setBackgroundMusic(Gdx.audio.newMusic(Gdx.files.internal("AudioClip/Wasteland Combat Loop.wav")));
+            App.getBackgroundMusic().setLooping(true);
+            App.getBackgroundMusic().setVolume(volume);
+            App.getBackgroundMusic().play();
 
             App.setCurrentGame(game);
             App.getCurrentUser().setGame(game);
@@ -49,5 +58,6 @@ public class PreGameMenuController {
             Main.getMain().setScreen(new GameView(new GameController(), GameAssetManager.getGameAssetManager().getMenuSkin()));
         }
     }
+
 
 }

@@ -1,6 +1,7 @@
 package com.tilldawn.Model;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Vector2;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -8,17 +9,19 @@ import java.util.ArrayList;
 public class Enemy {
     private EnemyType enemyType;
     private CollisionRect collisionRect;
-    private int x;
-    private int y;
+    Vector2 position;;
 
-    public Enemy(EnemyType enemyType, CollisionRect collisionRect, int x, int y) {
+    public Enemy(EnemyType enemyType, CollisionRect collisionRect, Vector2 position) {
         this.enemyType = enemyType;
         this.collisionRect = collisionRect;
-        this.x = x;
-        this.y = y;
+        this.position = position.cpy();
     }
 
     public EnemyType getEnemyType() {
         return enemyType;
+    }
+
+    public Vector2 getPosition() {
+        return position;
     }
 }

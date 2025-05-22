@@ -1,44 +1,95 @@
 package com.tilldawn.Model;
 
-import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+public class Weapon {
+    private WeaponType type;
+    private Sprite sprite;
+    private int ammo;
+    private boolean needsReload;
+    private boolean reloading;
+    private float reloadTimer;
+    private float reloadTime;
+    private boolean autoAim;
 
-public enum Weapon {
-    RESOLVER("Revolver", 20, 1, 1, 6,
-            GameAssetManager.getGameAssetManager().getRevolver()),
-    SHOTGUN("Shotgun", 10, 4, 1, 2,
-            GameAssetManager.getGameAssetManager().getShotgun()),
-    SMG_DUAL("SMGs Dual", 8, 1, 2, 24,
-            GameAssetManager.getGameAssetManager().getSmgDual()),;
-;
-    private final String name;
-    private final int damage;
-    private final int projectile;
-    private final int timeReload;
-    private final int ammoMax;
-    private final ArrayList<Texture> textures;
+    public Weapon(WeaponType type) {
+        this.type = type;
+        this.sprite = new Sprite(type.getTextures().get(0));
+        this.sprite.setPosition((float) Gdx.graphics.getWidth() / 2 + 12, (float) Gdx.graphics.getHeight() / 2 + 10);
+        this.sprite.setSize(50, 50);
+        this.ammo = type.getAmmoMax();
+        this.needsReload = false;
+        this.reloadTimer = 0;
+        this.reloading = false;
+        this.reloadTime = 0;
+        this.autoAim = false;
+    }
 
+    public WeaponType getType() {
+        return type;
+    }
 
-    Weapon(String name, int damage, int projectile, int timeReload, int ammoMax, ArrayList<Texture> textures) {
-        this.name = name;
-        this.damage = damage;
-        this.projectile = projectile;
-        this.timeReload = timeReload;
-        this.ammoMax = ammoMax;
-        this.textures = textures;
+    public Sprite getSprite() {
+        return sprite;
+    }
+
+    public int getAmmo() {
+        return ammo;
+    }
+
+    public void decreaseAmmo() {
+        ammo--;
+    }
+
+    public boolean isNeedsReload() {
+        return needsReload;
+    }
+
+    public void setNeedsReload(boolean needsReload) {
+        this.needsReload = needsReload;
     }
 
 
-    private ArrayList<Sprite> getSprites() {
-        ArrayList<Sprite> sprites = new ArrayList<>();
-        for (Texture texture : textures) {
-            sprites.add(new Sprite(texture));
-        }
-        return sprites;
+    public float getReloadTimer() {
+        return reloadTimer;
     }
 
+    public void setReloadTimer(float reloadTimer) {
+        this.reloadTimer = reloadTimer;
+    }
 
+    public void setSprite() {
+        this.sprite = new Sprite(type.getTextures().get(0));
+        this.sprite.setPosition((float) Gdx.graphics.getWidth() / 2 + 12, (float) Gdx.graphics.getHeight() / 2 + 10);
+        this.sprite.setSize(50, 50);
+    }
+
+    public boolean isReloading() {
+        return reloading;
+    }
+
+    public void setReloading(boolean reloading) {
+        this.reloading = reloading;
+    }
+
+    public float getReloadTime() {
+        return reloadTime;
+    }
+
+    public void setReloadTime(float reloadTime) {
+        this.reloadTime = reloadTime;
+    }
+
+    public void setAmmo(int ammo) {
+        this.ammo = ammo;
+    }
+
+    public boolean isAutoAim() {
+        return autoAim;
+    }
+
+    public void setAutoAim(boolean autoAim) {
+        this.autoAim = autoAim;
+    }
 }

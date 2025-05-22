@@ -10,13 +10,17 @@ public class GameController {
     private PlayerController playerController;
     private EnemyController enemyController;
     private WeaponController weaponController;
+    private SeedController seedController;
+    private AbilityController abilityController;
 
     public void setView(GameView view) {
         this.view = view;
-        worldController = new WorldController();
         playerController = new PlayerController();
+        worldController = new WorldController(playerController);
         enemyController = new EnemyController();
-        weaponController = new WeaponController();
+        weaponController = new WeaponController(enemyController);
+        seedController = new SeedController();
+        abilityController = new AbilityController();
     }
 
     public void updateGame() {
@@ -25,6 +29,12 @@ public class GameController {
             playerController.update();
             enemyController.update();
             weaponController.update();
+            seedController.update();
+            abilityController.update();
         }
+    }
+
+    public WeaponController getWeaponController() {
+        return weaponController;
     }
 }

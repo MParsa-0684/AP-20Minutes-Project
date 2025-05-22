@@ -21,7 +21,7 @@ public class GameView implements Screen, InputProcessor {
     @Override
     public void show() {
         stage = new Stage();
-        Gdx.input.setInputProcessor(stage);
+        Gdx.input.setInputProcessor(this);
     }
 
     @Override
@@ -31,7 +31,6 @@ public class GameView implements Screen, InputProcessor {
         controller.updateGame();
         Main.getBatch().end();
         stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
-
         stage.draw();
     }
 
@@ -77,6 +76,7 @@ public class GameView implements Screen, InputProcessor {
 
     @Override
     public boolean touchDown(int i, int i1, int i2, int i3) {
+        controller.getWeaponController().handleWeaponShoot(i, i1);
         return false;
     }
 
@@ -96,7 +96,8 @@ public class GameView implements Screen, InputProcessor {
     }
 
     @Override
-    public boolean mouseMoved(int i, int i1) {
+    public boolean mouseMoved(int screenX, int screenY) {
+        controller.getWeaponController().handleWeaponRotation(screenX, screenY);
         return false;
     }
 

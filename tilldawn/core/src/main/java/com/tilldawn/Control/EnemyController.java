@@ -14,4 +14,8 @@ public class EnemyController {
     public void update() {
 
     }
+
+    public ArrayList<Enemy> getEnemies() {
+        return enemies;
+    }
 }

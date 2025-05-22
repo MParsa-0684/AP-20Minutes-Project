@@ -10,29 +10,29 @@ import java.util.Arrays;
 public class GameAssetManager {
     private static GameAssetManager gameAssetManager;
     private static final Skin menuSkin = new Skin(Gdx.files.internal("skin/tracer-ui.json"));
-    private final ArrayList<ArrayList<Texture>> shanan = createHeroTextures(new String[][]{
+    private final ArrayList<ArrayList<Texture>> shana = createHeroTextures(new String[][]{
         {
-            "Heros/Shanan/idle/Idle_0 #8330.png",
-            "Heros/Shanan/idle/Idle_1 #8360.png",
-            "Heros/Shanan/idle/Idle_2 #8819.png",
-            "Heros/Shanan/idle/Idle_3 #8457.png",
-            "Heros/Shanan/idle/Idle_4 #8318.png",
-            "Heros/Shanan/idle/Idle_5 #8307.png"
+            "Heros/Shana/idle/Idle_0 #8330.png",
+            "Heros/Shana/idle/Idle_1 #8360.png",
+            "Heros/Shana/idle/Idle_2 #8819.png",
+            "Heros/Shana/idle/Idle_3 #8457.png",
+            "Heros/Shana/idle/Idle_4 #8318.png",
+            "Heros/Shana/idle/Idle_5 #8307.png"
         },
         {
-            "Heros/Shanan/walk/Walk_0 #8278.png",
-            "Heros/Shanan/walk/Walk_1 #8632.png",
-            "Heros/Shanan/walk/Walk_2 #8711.png",
-            "Heros/Shanan/walk/Walk_3 #8769.png",
-            "Heros/Shanan/walk/Walk_5 #8688.png",
-            "Heros/Shanan/walk/Walk_6 #8442.png",
-            "Heros/Shanan/walk/Walk_7 #8214.png"
+            "Heros/Shana/walk/Walk_0 #8278.png",
+            "Heros/Shana/walk/Walk_1 #8632.png",
+            "Heros/Shana/walk/Walk_2 #8711.png",
+            "Heros/Shana/walk/Walk_3 #8769.png",
+            "Heros/Shana/walk/Walk_5 #8688.png",
+            "Heros/Shana/walk/Walk_6 #8442.png",
+            "Heros/Shana/walk/Walk_7 #8214.png"
         },
         {
-            "Heros/Shanan/run/Run_0 #8762.png",
-            "Heros/Shanan/run/Run_1 #8778.png",
-            "Heros/Shanan/run/Run_2 #8286.png",
-            "Heros/Shanan/run/Run_3 #8349.png"
+            "Heros/Shana/run/Run_0 #8762.png",
+            "Heros/Shana/run/Run_1 #8778.png",
+            "Heros/Shana/run/Run_2 #8286.png",
+            "Heros/Shana/run/Run_3 #8349.png"
         }
     });
 
@@ -77,7 +77,10 @@ public class GameAssetManager {
             "Heros/Scarlet/idle/Idle_5 #8304.png"
         },
         {
-
+            "Heros/Scarlet/run/Run_0 #8759.png",
+            "Heros/Scarlet/run/Run_1 #8775.png",
+            "Heros/Scarlet/run/Run_2 #8283.png",
+            "Heros/Scarlet/run/Run_3 #8346.png"
         },
         {
             "Heros/Scarlet/run/Run_0 #8759.png",
@@ -126,7 +129,10 @@ public class GameAssetManager {
             "Heros/Dasher/idle/Idle_5 #8302.png"
         },
         {
-
+            "Heros/Dasher/run/Run_0 #8757.png",
+            "Heros/Dasher/run/Run_1 #8773.png",
+            "Heros/Dasher/run/Run_2 #8281.png",
+            "Heros/Dasher/run/Run_3 #8344.png"
         },
         {
             "Heros/Dasher/run/Run_0 #8757.png",
@@ -187,10 +193,11 @@ public class GameAssetManager {
         new Texture("Sprite/ElderBrain/ElderBrain.png")
     ));
 
-    private final Texture map = new Texture("Sprite/Map/Map.png");
+    private final Texture map = new Texture("Sprite/Map/map.png");
 
     private final Texture bullet = new Texture("Sprite/Icon/Icon_Bullet_Storm.png");
 
+    private final Texture seed = new Texture("Sprite/Seed/xp.png");
 
 
     public static GameAssetManager getGameAssetManager() {
@@ -217,7 +224,7 @@ public class GameAssetManager {
     }
 
     public ArrayList<ArrayList<Texture>> getShananaTextures() {
-        return shanan;
+        return shana;
     }
 
     public ArrayList<ArrayList<Texture>> getDiamondTextures() {
@@ -270,6 +277,10 @@ public class GameAssetManager {
 
     public Texture getBullet() {
         return bullet;
+    }
+
+    public Texture getSeed() {
+        return seed;
     }
 }
 

@@ -47,4 +47,6 @@ public class PreGame {
     public void setGameColor(Color gameColor) {
         this.gameColor = gameColor;
     }
+
+
 }
