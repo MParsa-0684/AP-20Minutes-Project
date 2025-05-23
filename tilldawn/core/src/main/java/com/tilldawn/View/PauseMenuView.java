@@ -5,10 +5,12 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.PauseableThread;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.tilldawn.Control.PauseMenuController;
 import com.tilldawn.Main;
+import com.tilldawn.Model.Ability;
 import com.tilldawn.Model.App;
 
 public class PauseMenuView implements Screen {
@@ -50,7 +52,7 @@ public class PauseMenuView implements Screen {
         this.abilitiesLabel = new Label("All Abilities Gained", skin);
         Table allAbilTable = new Table(skin);
         allAbilTable.defaults().pad(4);
-//        for (Ability a : player.getAcquiredAbilities()) {
+//        for (Ability a : App.getCurrentGame().getPlayer().getAbilities()) {
 //            // assume you have a TextureRegionDrawable icon for each ability
 //            ImageButton icon = new ImageButton(new TextureRegionDrawable(a.getIcon()));
 //            allAbilTable.add(icon);

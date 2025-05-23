@@ -7,15 +7,17 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 
 public class Bullet {
-    private Texture texture = GameAssetManager.getGameAssetManager().getBullet();
-    private Sprite sprite = new Sprite(texture);
+    private Texture texture;
+    private Sprite sprite;
     private Vector2 position;
     private Vector2 direction;
     private int speed;
     private int damage;
 
-    public Bullet(Vector2 position, int damage) {
-        this.position = App.getCurrentGame().getPlayer().getPosition().cpy();
+    public Bullet(Vector2 position, Vector2 ourPosition, int damage, Texture texture) {
+        this.texture = texture;
+        sprite = new Sprite(texture);
+        this.position = ourPosition.cpy();
         this.sprite.setPosition(this.position.x, this.position.y);
         this.direction = new Vector2(position.x - this.position.x, position.y - this.position.y).nor();
 

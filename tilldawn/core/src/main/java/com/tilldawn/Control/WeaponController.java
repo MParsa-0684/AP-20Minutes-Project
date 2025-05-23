@@ -15,13 +15,11 @@ import java.util.ArrayList;
 public class WeaponController {
     private Weapon weapon;
     private ArrayList<Bullet> playerBullets;
-    private ArrayList<Bullet> enemyBullets;
     private EnemyController enemyController;
 
     public WeaponController(EnemyController enemyController) {
         this.weapon = App.getCurrentGame().getPlayer().getWeapon();
         this.playerBullets = new ArrayList<>();
-        this.enemyBullets = new ArrayList<>();
         this.enemyController = enemyController;
     }
 
@@ -42,7 +40,6 @@ public class WeaponController {
         }
 
         handleWeaponBullets();
-        handleEnemyBullets();
 
     }
 
@@ -107,7 +104,9 @@ public class WeaponController {
             return;
         }
 
-        playerBullets.add(new Bullet(new Vector2(x, y), weapon.getType().getDamage()));
+
+        playerBullets.add(new Bullet(new Vector2(x, y), App.getCurrentGame().getPlayer().getPosition(),
+            weapon.getType().getDamage(), GameAssetManager.getGameAssetManager().getBullet()));
         weapon.decreaseAmmo();
     }
 
@@ -151,7 +150,5 @@ public class WeaponController {
         }
     }
 
-    public void handleEnemyBullets() {
 
-    }
 }

@@ -3,12 +3,11 @@ package com.tilldawn.Control;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.tilldawn.Main;
-import com.tilldawn.Model.App;
-import com.tilldawn.Model.Enemy;
-import com.tilldawn.Model.EnemyType;
+import com.tilldawn.Model.*;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -16,12 +15,13 @@ import java.util.Random;
 public class EnemyController {
     private ArrayList<Enemy> enemies;
     private PlayerController playerController;
+    private ArrayList<Bullet> enemyBullets;
 
     public EnemyController(PlayerController playerController) {
         this.enemies = new ArrayList<>();
         this.playerController = playerController;
+        this.enemyBullets = new ArrayList<>();
 
-        int ctr = 0;
         Random rand = new Random();
         for (int i = 1; i < 101; i++) {
             for (int j = 0; j < 1000; j++) {
@@ -38,19 +38,63 @@ public class EnemyController {
                     flag = false;
 
                 if(flag) {
-                    ctr++;
                     enemies.add(enemy);
                     break;
                 }
             }
         }
-//        System.out.println(ctr);
     }
 
     public void update() {
+        generateRandomEnemies();
+
         for (Enemy enemy : enemies) {
             enemy.getSprite().draw(Main.getBatch());
             updateEnemy(enemy);
+        }
+
+        handleEnemyBullets();
+    }
+
+    private void generateRandomEnemies() {
+        float time = App.getCurrentGame().getCurrentTime();
+        if(3 - time % 3 <= 0.017) {
+            int number = (int) Math.ceil(time / 30);
+            for (int i = 0; i < number; i++) {
+                Vector2 position = getRandomPosition();
+
+                Enemy enemy = new Enemy(EnemyType.TENTACLE_MONSTER, position);
+                enemies.add(enemy);
+            }
+        }
+
+        if(time >= App.getCurrentGame().getGameTime() / 4 && (10 - time % 10) <= 0.017) {
+            int number = (int) Math.ceil((4 * time - App.getCurrentGame().getGameTime() + 30) / 30);
+            for (int i = 0; i < number; i++) {
+                Vector2 position = getRandomPosition();
+                Enemy enemy = new Enemy(EnemyType.EYEBAT, position);
+                enemies.add(enemy);
+            }
+        }
+
+        //ELDER enemy
+    }
+
+    private Vector2 getRandomPosition() {
+        Random rand = new Random();
+        float rand1 = rand.nextFloat();
+        float rand2 = rand.nextFloat();
+        if(rand1 > 0.5) {
+            Vector2 position = new Vector2(
+                App.getCurrentGame().getPlayer().getPosition().x + (float) Gdx.graphics.getWidth() / 2 * rand2,
+                App.getCurrentGame().getPlayer().getPosition().y + (float) Gdx.graphics.getHeight() / 2 * (rand1 > 0.7 ? 1 : -1));
+            return position;
+        }
+        else {
+            Vector2 position = new Vector2(
+                App.getCurrentGame().getPlayer().getPosition().x + (float) Gdx.graphics.getWidth() / 2 * (rand1 > 0.3 ? 1 : -1),
+                App.getCurrentGame().getPlayer().getPosition().y + (float) Gdx.graphics.getHeight() / 2 * rand2);
+            return position;
         }
     }
 
@@ -87,22 +131,38 @@ public class EnemyController {
     }
 
     private void handleTentacle(Enemy enemy) {
+        Vector2 direction = new Vector2(App.getCurrentGame().getPlayer().getPosition().x - enemy.getPosition().x,
+            App.getCurrentGame().getPlayer().getPosition().y - enemy.getPosition().y).nor();
 
+        enemy.update(direction);
     }
 
     private void handleEyebat(Enemy enemy) {
+        Vector2 direction = new Vector2(App.getCurrentGame().getPlayer().getPosition().x - enemy.getPosition().x,
+            App.getCurrentGame().getPlayer().getPosition().y - enemy.getPosition().y).nor();
 
+        enemy.update(direction);
+
+        float time = App.getCurrentGame().getCurrentTime();
+        if(3 - time % 3 <= 0.017) {
+            enemyBullets.add(new Bullet(App.getCurrentGame().getPlayer().getPosition(), enemy.getPosition(), 1,
+                GameAssetManager.getGameAssetManager().getEnemyBullet()));
+        }
     }
 
     private void handleElder(Enemy enemy) {
-
+        //TODO
     }
 
 
     private void enemyAnimation(Enemy enemy) {
         Array<Texture> regions = new Array<>(enemy.getEnemyType().getTextures().size());
         enemy.getEnemyType().getTextures().forEach(regions::add);
-        Animation<Texture> animation = new Animation<>(0.5f, regions);
+        Animation<Texture> animation;
+        if(enemy.getEnemyType() == EnemyType.TREE)
+            animation = new Animation<>(0.5f, regions);
+        else
+            animation = new Animation<>(0.1f, regions);
 
         enemy.getSprite().setRegion(animation.getKeyFrame(enemy.getTime()));
 
@@ -114,6 +174,26 @@ public class EnemyController {
         }
 
         animation.setPlayMode(Animation.PlayMode.LOOP);
+    }
+
+    private void handleEnemyBullets() {
+        ArrayList<Bullet> tempBullets = new ArrayList<>();
+        for(Bullet b : enemyBullets) {
+            b.getSprite().draw(Main.getBatch());
+
+            b.getSprite().setX(b.getSprite().getX() + b.getDirection().x * 3);
+            b.getSprite().setY(b.getSprite().getY() + b.getDirection().y * 3);
+            if(App.getCurrentGame().getPlayer().getCollisionRect().hasIntersect(
+                new CollisionRect(b.getSprite().getX(), b.getSprite().getY(), b.getSprite().getWidth(), b.getSprite().getHeight())
+            )) {
+                App.getCurrentGame().getPlayer().decreaseHealth(1);
+                tempBullets.add(b);
+            }
+        }
+
+        for (Bullet b : tempBullets) {
+            enemyBullets.remove(b);
+        }
     }
 
     public ArrayList<Enemy> getEnemies() {

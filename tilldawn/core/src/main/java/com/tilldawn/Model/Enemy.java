@@ -48,4 +48,10 @@ public class Enemy {
         this.time = time;
     }
 
+    public void update(Vector2 direction) {
+        this.getPosition().set(this.getPosition().x + direction.x, this.getPosition().y + direction.y);
+        this.sprite.setPosition(this.getPosition().x, this.getPosition().y);
+        this.getCollisionRect().update(this.getSprite().getX(),
+            this.getSprite().getY(), this.getSprite().getWidth(), this.getSprite().getHeight());
+    }
 }

@@ -71,7 +71,7 @@ public class ProfileMenuView implements Screen {
         // Avatar selection from existing list
         avatarLabel = new Label("Choose Avatar:", skin);
         avatarSelectBox = new SelectBox<>(skin);
-        avatarSelectBox.setItems("SHANAN", "DIAMOND", "SCARLET", "LILITH", "DASHER");
+        avatarSelectBox.setItems("SHANA", "DIAMOND", "SCARLET", "LILITH", "DASHER");
         avatarSelectBox.setSelected(App.getCurrentUser().getAvatar().getName());
         avatarPreviewImage = new Image(new TextureRegionDrawable(new TextureRegion(App.getCurrentUser().getCurrentSprite())));
         avatarSelectBox.addListener(new ChangeListener() {

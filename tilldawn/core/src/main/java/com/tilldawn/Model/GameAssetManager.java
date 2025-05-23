@@ -199,6 +199,7 @@ public class GameAssetManager {
 
     private final Texture seed = new Texture("Sprite/Seed/xp.png");
 
+    private final Texture enemyBullet = new Texture("Sprite/Icon/Icon_LightBullet.png");
 
     public static GameAssetManager getGameAssetManager() {
         if(gameAssetManager == null) {
@@ -281,6 +282,10 @@ public class GameAssetManager {
 
     public Texture getSeed() {
         return seed;
+    }
+
+    public Texture getEnemyBullet() {
+        return enemyBullet;
     }
 }
 

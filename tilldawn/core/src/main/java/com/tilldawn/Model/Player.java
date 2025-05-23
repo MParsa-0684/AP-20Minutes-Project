@@ -148,5 +148,7 @@ public class Player {
         this.xp = xp;
     }
 
-
+    public ArrayList<Ability> getAbilities() {
+        return abilities;
+    }
 }
