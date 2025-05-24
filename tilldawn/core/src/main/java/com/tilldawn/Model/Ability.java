@@ -1,30 +1,39 @@
 package com.tilldawn.Model;
 
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.Gdx;
 
-public enum Ability {
-    VITALITY("VITALITY", GameAssetManager.getGameAssetManager().getAbilities().get(0)),
-    DAMAGER("DAMAGER", GameAssetManager.getGameAssetManager().getAbilities().get(1)),
-    PROCREASE("PROCREASE", GameAssetManager.getGameAssetManager().getAbilities().get(2)),
-    AMOCREASE("AMOCREASE", GameAssetManager.getGameAssetManager().getAbilities().get(3)),
-    SPEEDY("SPEEDY", GameAssetManager.getGameAssetManager().getAbilities().get(4));
+public class Ability {
+    private AbilityType type;
+    private float time;
 
-    private final String name;
-    private final Texture texture;
-    private final Sprite sprite;
-
-    Ability(String name, Texture texture) {
-        this.name = name;
-        this.texture = texture;
-        this.sprite = new Sprite(texture);
+    public Ability(AbilityType type) {
+        this.type = type;
+        if(type == AbilityType.DAMAGER || type == AbilityType.SPEEDY)
+            this.time = 10;
     }
 
-    public String getName() {
-        return name;
+    public void useAbility() {
+        switch (type){
+            case DAMAGER:
+            case SPEEDY:
+                if(time > 0)
+                    time -= Gdx.graphics.getDeltaTime();
+                break;
+            default :
+                break;
+        }
     }
 
-    public Texture getTexture() {
-        return texture;
+    public AbilityType getType() {
+        return type;
     }
+
+    public float getTime() {
+        return time;
+    }
+
+    public void setTime(float time) {
+        this.time = time;
+    }
+
 }

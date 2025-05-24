@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.HashMap;
 
 public class Player {
     private Avatar avatar;
@@ -18,7 +18,7 @@ public class Player {
     private boolean isWalking;
     private boolean isRunning;
     private Vector2 position;
-    private ArrayList<Ability> abilities;
+    private HashMap<AbilityType, ArrayList<Ability>> abilities;
     private float time;
     private int level;
     private int killed;
@@ -39,7 +39,11 @@ public class Player {
         this.isWalking = false;
         this.isRunning = false;
         this.position = new Vector2((float) Gdx.graphics.getWidth() / 2, (float) Gdx.graphics.getHeight() / 2);
-        this.abilities = new ArrayList<>();
+        this.abilities = new HashMap<>();
+        for (AbilityType value : AbilityType.values()) {
+            this.abilities.put(value, new ArrayList<>());
+        }
+
         this.time = 0;
         this.level = 1;
         this.invincible = false;
@@ -81,7 +85,15 @@ public class Player {
     }
 
     public int getSpeed() {
-        return speed;
+        int sp = speed;
+        for (Ability ability : abilities.get(AbilityType.SPEEDY)) {
+            if(ability.getTime() > 0) {
+                sp *= 2;
+                break;
+            }
+        }
+
+        return sp;
     }
 
     public void setIdle(boolean idle) {
@@ -151,7 +163,7 @@ public class Player {
         this.xp = xp;
     }
 
-    public ArrayList<Ability> getAbilities() {
+    public HashMap<AbilityType, ArrayList<Ability>> getAbilities() {
         return abilities;
     }
 
@@ -161,5 +173,9 @@ public class Player {
 
     public int getKilled() {
         return killed;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
     }
 }

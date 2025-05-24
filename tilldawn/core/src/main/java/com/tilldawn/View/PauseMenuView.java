@@ -5,12 +5,8 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import com.badlogic.gdx.utils.PauseableThread;
-import com.badlogic.gdx.utils.ScreenUtils;
 import com.tilldawn.Control.PauseMenuController;
 import com.tilldawn.Main;
-import com.tilldawn.Model.Ability;
 import com.tilldawn.Model.App;
 
 public class PauseMenuView implements Screen {

@@ -2,38 +2,37 @@ package com.tilldawn.View;
 
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
+
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.tilldawn.Control.GameController;
 import com.tilldawn.Main;
 import com.tilldawn.Model.Ability;
+import com.tilldawn.Model.AbilityType;
 import com.tilldawn.Model.App;
 import com.tilldawn.Model.Game;
 
-import java.util.ArrayList;
 
 public class GameView implements Screen, InputProcessor {
-    private com.tilldawn.Model.Game game;
-    private GameController controller;
+    private final com.tilldawn.Model.Game game;
+    private final GameController controller;
     private Stage stage;
-    private OrthographicCamera camera;
-    private Viewport viewport;
-    private Label healthLabel;
-    private Label levelLabel;
-    private Label xpLabel;
-    private Label ammoLabel;
-    private Label timeLabel;
-    private TextButton pauseButton;
-    private ProgressBar levelProgressBar;
-    private ArrayList<Texture> abilities;
-    private Skin skin;
+    private final OrthographicCamera camera;
+    private final Viewport viewport;
+    private final Label healthLabel;
+    private final Label levelLabel;
+    private final Label xpLabel;
+    private final Label ammoLabel;
+    private final Label timeLabel;
+    private final TextButton pauseButton;
+    private final ProgressBar levelProgressBar;
+    private Table right;
+    private final Skin skin;
 
     public GameView(Skin skin, Game game) {
         this.game = game;
@@ -50,11 +49,11 @@ public class GameView implements Screen, InputProcessor {
             ((int) App.getCurrentGame().getCurrentTime() / 60),
             ((int) App.getCurrentGame().getCurrentTime() % 60)), skin);
         pauseButton = new TextButton("Pause", skin);
-        levelProgressBar = new ProgressBar(0, App.getCurrentGame().getPlayer().getLevel() * 20, 1, false, skin);
+        levelProgressBar = new ProgressBar(0, App.getCurrentGame().getPlayer().getLevel() * 20, 3, false, skin);
         this.skin = skin;
 
         camera = new OrthographicCamera();
-        viewport = new FitViewport(1920, 1080, camera);
+        viewport = new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), camera);
     }
 
     @Override
@@ -70,15 +69,13 @@ public class GameView implements Screen, InputProcessor {
         root.top().padTop(10);
         stage.addActor(root);
 
-        // 2) add the progress bar spanning both columns, centered
         root.add(levelProgressBar)
             .colspan(2)
-            .expandX()
-            .left()
-            .padBottom(20);
-        root.row();
+            .growX()
+            .height(20)
+            .pad(5)
+            .row();
 
-        // 3) build left‐column table (stats + pause button)
         Table left = new Table(skin);
         left.defaults().pad(5).left();
         left.add(healthLabel).row();
@@ -88,24 +85,27 @@ public class GameView implements Screen, InputProcessor {
         left.add(timeLabel)  .row();
         left.add(pauseButton);
 
-        // 4) build right‐column table (ability icons)
-        Table right = new Table(skin);
-        right.defaults().pad(4);
-        for (Ability ability : App.getCurrentGame().getPlayer().getAbilities()) {
-            Image icon = new Image(new TextureRegionDrawable(new TextureRegion(ability.getTexture())));
-            right.add(icon).size(32).row();    // one per row; use .row() or remove if you want in a grid
-        }
-
-        // 5) add both to the root: left on left, right on right
+        right = new Table(skin);
+        abilityShow();
         root.add(left).expandY().top().left();
         root.add(right).expandY().top().right();
+    }
+
+    private void abilityShow() {
+        right.defaults().pad(4);
+        for (AbilityType value : AbilityType.values()) {
+            for (Ability ability : App.getCurrentGame().getPlayer().getAbilities().get(value)) {
+                Image icon = new Image(new TextureRegionDrawable(new TextureRegion(ability.getType().getTexture())));
+                right.add(icon).size(45);
+            }
+            right.row();
+        }
     }
 
     private void updateCamera() {
         Vector2 p = App.getCurrentGame().getPlayer().getPosition();
         camera.position.set(p.x, p.y, 0);
         camera.update();
-
     }
 
     @Override
@@ -123,8 +123,6 @@ public class GameView implements Screen, InputProcessor {
 
         Main.getBatch().end();
 
-
-
         healthLabel.setText("HP : " + App.getCurrentGame().getPlayer().getHealth());
         levelLabel.setText("Level : " + App.getCurrentGame().getPlayer().getLevel());
         xpLabel.setText("XP : " + App.getCurrentGame().getPlayer().getXp());
@@ -134,7 +132,9 @@ public class GameView implements Screen, InputProcessor {
             ((int) App.getCurrentGame().getCurrentTime() % 60)));
         int currentLevelXP = 10 * (App.getCurrentGame().getPlayer().getLevel() - 1) * App.getCurrentGame().getPlayer().getLevel();
         levelProgressBar.setValue(App.getCurrentGame().getPlayer().getXp() - currentLevelXP);
-//        levelProgressBar.
+
+        right.clear();
+        abilityShow();
 
         stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
         stage.draw();
@@ -228,5 +228,9 @@ public class GameView implements Screen, InputProcessor {
 
     public OrthographicCamera getCamera() {
         return camera;
+    }
+
+    public ProgressBar getLevelProgressBar() {
+        return levelProgressBar;
     }
 }

@@ -15,10 +15,10 @@ import com.tilldawn.Model.*;
 import java.util.ArrayList;
 
 public class WeaponController {
-    private Weapon weapon;
-    private ArrayList<Bullet> playerBullets;
-    private SeedController seedController;
-    private EnemyController enemyController;
+    private final Weapon weapon;
+    private final ArrayList<Bullet> playerBullets;
+    private final SeedController seedController;
+    private final EnemyController enemyController;
 
     public WeaponController(EnemyController enemyController, SeedController seedController) {
         this.weapon = App.getCurrentGame().getPlayer().getWeapon();
@@ -94,7 +94,7 @@ public class WeaponController {
         else {
             weapon.setReloadTime(0);
             weapon.getSprite().setRegion(weapon.getType().getTextures().get(0));
-            weapon.setAmmo(weapon.getType().getAmmoMax());
+            weapon.setAmmo(weapon.getMaxAmmo());
         }
 
         animation.setPlayMode(Animation.PlayMode.NORMAL);
@@ -118,10 +118,12 @@ public class WeaponController {
             return;
         }
 
-        Vector3 world = new Vector3(x, Gdx.graphics.getHeight() - y, 0);
-        App.getCurrentUser().getGameView().getCamera().unproject(world);
-        playerBullets.add(new Bullet(new Vector2(world.x, world.y), App.getCurrentGame().getPlayer().getPosition(),
-            weapon.getType().getDamage(), GameAssetManager.getGameAssetManager().getBullet()));
+        for (int i = 0; i < weapon.getProjectile(); i++) {
+            Vector3 world = new Vector3(x, Gdx.graphics.getHeight() - y, 0);
+            App.getCurrentUser().getGameView().getCamera().unproject(world);
+            playerBullets.add(new Bullet(new Vector2(world.x, world.y), App.getCurrentGame().getPlayer().getPosition(),
+                weapon.getType().getDamage(), GameAssetManager.getGameAssetManager().getBullet()));
+        }
         weapon.decreaseAmmo();
     }
 

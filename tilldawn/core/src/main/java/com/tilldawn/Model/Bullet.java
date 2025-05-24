@@ -55,6 +55,12 @@ public class Bullet {
     }
 
     public int getDamage() {
+        int dmg = damage;
+        for (Ability ability : App.getCurrentGame().getPlayer().getAbilities().get(AbilityType.DAMAGER)) {
+            if(ability.getTime() > 0) {
+                dmg = (dmg / 4) * 5;
+            }
+        }
         return damage;
     }
 }
