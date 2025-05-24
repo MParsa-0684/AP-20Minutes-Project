@@ -10,6 +10,7 @@ import com.tilldawn.Model.GameAssetManager;
 import com.tilldawn.View.GameView;
 import com.tilldawn.View.MainMenuView;
 import com.tilldawn.View.PauseMenuView;
+import com.tilldawn.View.WinLoseView;
 
 public class GameController {
     private Game game;
@@ -29,12 +30,14 @@ public class GameController {
         playerController = new PlayerController();
         seedController = new SeedController();
         enemyController = new EnemyController(playerController);
-        weaponController = new WeaponController(enemyController);
+        weaponController = new WeaponController(enemyController, seedController);
         abilityController = new AbilityController();
     }
 
     public void updateGame() {
         game.setCurrentTime(game.getCurrentTime() + Gdx.graphics.getDeltaTime());
+        checkWinLose();
+
         if(view.getPauseButton().isChecked()) {
             view.getPauseButton().setChecked(false);
             Main.getMain().getScreen().dispose();
@@ -55,4 +58,19 @@ public class GameController {
     public WeaponController getWeaponController() {
         return weaponController;
     }
+
+    private void checkWinLose() {
+        if(game.getPlayer().getHealth() <= 0) {
+            Main.getMain().getScreen().dispose();
+            Main.getMain().setScreen(new WinLoseView(new WinLoseController(), GameAssetManager.getGameAssetManager().getMenuSkin(), false));
+            return;
+        }
+        if(game.getCurrentTime() == game.getGameTime()) {
+            Main.getMain().getScreen().dispose();
+            Main.getMain().setScreen(new WinLoseView(new WinLoseController(), GameAssetManager.getGameAssetManager().getMenuSkin(), true));
+            return;
+        }
+
+    }
+
 }

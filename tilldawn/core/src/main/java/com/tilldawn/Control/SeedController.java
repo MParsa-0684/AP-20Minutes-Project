@@ -28,4 +28,8 @@ public class SeedController {
             seeds.remove(seed);
         }
     }
+
+    public ArrayList<Seed> getSeeds() {
+        return seeds;
+    }
 }

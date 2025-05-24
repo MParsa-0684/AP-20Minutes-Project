@@ -168,6 +168,7 @@ public class GameAssetManager {
     private final ArrayList<Texture> tree = new ArrayList<>(Arrays.asList(
         new Texture("Sprite/T/T_TreeMonster_0.png"),
         new Texture("Sprite/T/T_TreeMonster_1.png"),
+        new Texture("Sprite/T/T_TreeMonster_2.png"),
         new Texture("Sprite/T/T_TreeMonster_2.png")
     ));
 
@@ -179,14 +180,16 @@ public class GameAssetManager {
         new Texture("Sprite/TentacleSpawn/TentacleSpawn0.png"),
         new Texture("Sprite/TentacleSpawn/TentacleSpawn1.png"),
         new Texture("Sprite/TentacleSpawn/TentacleSpawn2.png"),
-        new Texture("Sprite/TentacleAttack/TentacleAttack.png")
+        new Texture("Sprite/TentacleAttack/TentacleAttack.png"),
+        new Texture("Sprite/T/T_Cultist_EM.png")
     ));
 
     private final ArrayList<Texture> eyebat = new ArrayList<>(Arrays.asList(
         new Texture("Sprite/T/T_EyeBat_0.png"),
         new Texture("Sprite/T/T_EyeBat_1.png"),
         new Texture("Sprite/T/T_EyeBat_2.png"),
-        new Texture("Sprite/T/T_EyeBat_3.png")
+        new Texture("Sprite/T/T_EyeBat_3.png"),
+        new Texture("Sprite/T/T_EyeBat_EM.png")
     ));
 
     private final ArrayList<Texture> elder = new ArrayList<>(Arrays.asList(
@@ -200,6 +203,14 @@ public class GameAssetManager {
     private final Texture seed = new Texture("Sprite/Seed/xp.png");
 
     private final Texture enemyBullet = new Texture("Sprite/Icon/Icon_LightBullet.png");
+
+    private final ArrayList<Texture> abilities = new ArrayList<>(Arrays.asList(
+        new Texture("Sprite/Ability/Vitality.png"),
+        new Texture("Sprite/Ability/Damager.png"),
+        new Texture("Sprite/Ability/Procrease.png"),
+        new Texture("Sprite/Ability/Amocrease.png"),
+        new Texture("Sprite/Ability/Speedy.png")
+    ));
 
     public static GameAssetManager getGameAssetManager() {
         if(gameAssetManager == null) {
@@ -286,6 +297,10 @@ public class GameAssetManager {
 
     public Texture getEnemyBullet() {
         return enemyBullet;
+    }
+
+    public ArrayList<Texture> getAbilities() {
+        return abilities;
     }
 }
 

@@ -5,6 +5,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -17,6 +18,7 @@ import com.tilldawn.Model.App;
 import com.tilldawn.Model.User;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class ScoreboardMenuView implements Screen {
     private Stage stage;
@@ -24,10 +26,10 @@ public class ScoreboardMenuView implements Screen {
     private Skin skin;
     private Table table;
     private Label titleLabel;
-    private Label usernameLabel;
-    private Label scoreLabel;
-    private Label killLabel;
-    private Label maxTimeLabel;
+    private TextButton usernameTextButton;
+    private TextButton scoreTextButton;
+    private TextButton killTextButton;
+    private TextButton maxTimeTextButton;
     private TextButton backButton;
 
     public ScoreboardMenuView(ScoreboardMenuController controller, Skin skin) {
@@ -35,45 +37,45 @@ public class ScoreboardMenuView implements Screen {
         this.skin = skin;
         this.titleLabel = new Label("Scoreboard", skin);
         this.titleLabel.setFontScale(3);
-        this.usernameLabel = new Label("Username", skin);
-        this.usernameLabel.setFontScale(1.5f);
-        this.usernameLabel.addListener(new ClickListener() {
+        this.usernameTextButton = new TextButton("Username", skin);
+        this.usernameTextButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 App.getUsers().sort((a, b) -> a.getUsername().compareToIgnoreCase(b.getUsername()));
+                extractedTable();
             }
         });
 
-        this.scoreLabel = new Label("Score", skin);
-        this.scoreLabel.setFontScale(1.5f);
-        this.scoreLabel.addListener(new ClickListener() {
+        this.scoreTextButton = new TextButton("Score", skin);
+        this.scoreTextButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                App.getUsers().sort((a, b) -> a.getScore() - b.getScore());
+                App.getUsers().sort(Comparator.comparingInt(User::getScore).reversed());
+                extractedTable();
             }
         });
 
-        this.killLabel = new Label("Kill Count", skin);
-        this.killLabel.setFontScale(1.5f);
-        this.killLabel.addListener(new ClickListener() {
+        this.killTextButton = new TextButton("Kill Count", skin);
+        this.killTextButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                App.getUsers().sort((a, b) -> a.getKillCount() - b.getKillCount());
+                App.getUsers().sort(Comparator.comparingInt(User::getKillCount).reversed());
+                extractedTable();
             }
         });
 
-        this.maxTimeLabel = new Label("Max Time", skin);
-        this.maxTimeLabel.setFontScale(1.5f);
-        this.maxTimeLabel.addListener(new ClickListener() {
+        this.maxTimeTextButton = new TextButton("Max Time", skin);
+        this.maxTimeTextButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                App.getUsers().sort((a, b) -> a.getMaxTimeSpent() - b.getMaxTimeSpent());
+                App.getUsers().sort(Comparator.comparingInt(User::getMaxTimeSpent).reversed());
+                extractedTable();
             }
         });
 
         this.backButton = new TextButton("Back", skin);
 
-        App.getUsers().sort((a, b) -> a.getScore() - b.getScore());
+        App.getUsers().sort(Comparator.comparingInt(User::getScore).reversed());
         controller.setView(this);
     }
 
@@ -86,13 +88,22 @@ public class ScoreboardMenuView implements Screen {
         table = new Table();
         table.setFillParent(true);
         stage.addActor(table);
+        extractedTable();
+
+        stage.addActor(table);
+    }
+
+    private void extractedTable() {
+        stage.clear();
+        table.clear();
         table.defaults().pad(5).space(5);
+        table.setFillParent(true);
         table.add(titleLabel).colspan(4).center().padBottom(20).row();
 
-        table.add(usernameLabel).pad(10);
-        table.add(scoreLabel).pad(10);
-        table.add(killLabel).pad(10);
-        table.add(maxTimeLabel).pad(10);
+        table.add(usernameTextButton).pad(10);
+        table.add(scoreTextButton).pad(10);
+        table.add(killTextButton).pad(10);
+        table.add(maxTimeTextButton).pad(10);
         table.row();
 
         ArrayList<User> users = App.getUsers();
@@ -104,6 +115,7 @@ public class ScoreboardMenuView implements Screen {
             Label scoreLabel = new Label(String.valueOf(u.getScore()), skin);
             Label killLabel = new Label(String.valueOf(u.getKillCount()), skin);
             Label maxTimeLabel = new Label(String.valueOf(u.getMaxTimeSpent()), skin);
+
             if(i == 0) {
                 usernameLabel.setColor(Color.GOLD);
                 scoreLabel.setColor(Color.GOLD);
@@ -137,7 +149,6 @@ public class ScoreboardMenuView implements Screen {
             table.row();
         }
         table.add(backButton).colspan(4).center().padTop(50).pad(5).row();
-
         stage.addActor(table);
     }
 

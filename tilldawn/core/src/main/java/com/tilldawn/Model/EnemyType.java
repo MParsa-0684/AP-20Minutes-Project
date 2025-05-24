@@ -32,4 +32,8 @@ public enum EnemyType {
     public ArrayList<Texture> getTextures() {
         return Textures;
     }
+
+    public int getHP() {
+        return HP;
+    }
 }

@@ -42,8 +42,8 @@ public class MainMenuView implements Screen {
         this.hintButton = new TextButton("Hint Menu", skin);
         this.loadGameButton = new TextButton("Load Game", skin);
         this.exitButton = new TextButton("Exit Account", skin);
-        this.userNameLabel = new Label(App.getCurrentUser().getUsername(), skin);
-        this.scoreLabel = new Label(String.valueOf(App.getCurrentUser().getScore()), skin);
+        this.userNameLabel = new Label("Username : " + App.getCurrentUser().getUsername(), skin);
+        this.scoreLabel = new Label("Score : " + String.valueOf(App.getCurrentUser().getScore()), skin);
         this.errorLabel = new Label("", skin);
 
         controller.setView(this);

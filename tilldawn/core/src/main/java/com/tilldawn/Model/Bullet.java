@@ -13,6 +13,7 @@ public class Bullet {
     private Vector2 direction;
     private int speed;
     private int damage;
+    private CollisionRect collisionRect;
 
     public Bullet(Vector2 position, Vector2 ourPosition, int damage, Texture texture) {
         this.texture = texture;
@@ -25,6 +26,8 @@ public class Bullet {
         sprite.setRotation((float) (Math.PI - angle * MathUtils.radiansToDegrees));
         this.speed = 5;
         this.damage = damage;
+        collisionRect = new CollisionRect(this.position.x, this.position.y,
+            this.sprite.getWidth() / 2, this.sprite.getHeight() / 2);
     }
 
     public Sprite getSprite() {
@@ -37,5 +40,21 @@ public class Bullet {
 
     public Vector2 getDirection() {
         return direction;
+    }
+
+    public void update() {
+        this.getSprite().setX(this.getSprite().getX() + this.direction.x * this.speed);
+        this.getSprite().setY(this.getSprite().getY() - this.direction.y * this.speed);
+        this.position.set(this.getSprite().getX(), this.getSprite().getY());
+        this.collisionRect.update(this.position.x, this.position.y,
+            this.sprite.getWidth() / 2, this.sprite.getHeight() / 2);
+    }
+
+    public CollisionRect getCollisionRect() {
+        return collisionRect;
+    }
+
+    public int getDamage() {
+        return damage;
     }
 }

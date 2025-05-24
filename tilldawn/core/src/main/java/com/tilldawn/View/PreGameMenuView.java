@@ -28,6 +28,7 @@ public class PreGameMenuView implements Screen {
     private TextButton backButton;
     private TextButton gameButton;
     private TextButton settingsButton;
+    private Label errorLabel;
     private Table table;
 
 
@@ -65,6 +66,7 @@ public class PreGameMenuView implements Screen {
         heroSelectBox.setSelected(App.getCurrentUser().getAvatar().getName());
         weaponSelectBox.setSelected("Revolver");
         timeSelectBox.setSelected("2");
+        errorLabel = new Label((App.getCurrentUser().getGameView() != null) ? "Your saved game will be eliminated!" : "", skin);
 
         controller.setView(this);
     }
@@ -100,6 +102,9 @@ public class PreGameMenuView implements Screen {
 
         table.add(backButton).left().pad(5);
         table.add(settingsButton).right().pad(5);
+        table.row();
+        table.add(errorLabel).center().pad(5);
+        table.row();
 
         stage.addActor(table);
     }

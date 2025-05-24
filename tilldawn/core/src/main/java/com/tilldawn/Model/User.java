@@ -101,4 +101,12 @@ public class User {
     public PreGame getPreGame() {
         return preGame;
     }
+
+    public void increaseScore(int score) {
+        this.score += score;
+    }
+
+    public void updateMaxTimeSpent(int maxTimeSpent) {
+        this.maxTimeSpent = Math.max(maxTimeSpent, this.maxTimeSpent);
+    }
 }

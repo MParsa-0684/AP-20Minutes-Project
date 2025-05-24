@@ -10,8 +10,8 @@ public class Seed {
     private Vector2 position;
     private CollisionRect collisionRect;
 
-    public Seed(Vector2 position) {
-        texture = GameAssetManager.getGameAssetManager().getSeed();
+    public Seed(Vector2 position, Texture texture) {
+        this.texture = texture;
         sprite = new Sprite(texture);
         this.position = position.cpy();
         sprite.setPosition(this.position.x, this.position.y);

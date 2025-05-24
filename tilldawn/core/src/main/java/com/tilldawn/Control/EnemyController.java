@@ -157,7 +157,11 @@ public class EnemyController {
 
     private void enemyAnimation(Enemy enemy) {
         Array<Texture> regions = new Array<>(enemy.getEnemyType().getTextures().size());
-        enemy.getEnemyType().getTextures().forEach(regions::add);
+        for (int i = 0; i < enemy.getEnemyType().getTextures().size(); i++) {
+            if(i != enemy.getEnemyType().getTextures().size() - 1)
+                regions.add(enemy.getEnemyType().getTextures().get(i));
+        }
+
         Animation<Texture> animation;
         if(enemy.getEnemyType() == EnemyType.TREE)
             animation = new Animation<>(0.5f, regions);

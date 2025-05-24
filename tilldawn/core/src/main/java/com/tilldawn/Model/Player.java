@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Player {
     private Avatar avatar;
@@ -20,6 +21,7 @@ public class Player {
     private ArrayList<Ability> abilities;
     private float time;
     private int level;
+    private int killed;
     private boolean invincible;
     private float invincibleTime;
     private int xp;
@@ -43,6 +45,7 @@ public class Player {
         this.invincible = false;
         this.invincibleTime = 0;
         this.xp = 0;
+        this.killed = 0;
     }
 
     public Avatar getAvatar() {
@@ -150,5 +153,13 @@ public class Player {
 
     public ArrayList<Ability> getAbilities() {
         return abilities;
+    }
+
+    public void increaseKilled() {
+        this.killed++;
+    }
+
+    public int getKilled() {
+        return killed;
     }
 }
