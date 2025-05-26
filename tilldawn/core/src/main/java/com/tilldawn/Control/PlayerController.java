@@ -9,13 +9,16 @@ import com.badlogic.gdx.utils.Array;
 import com.tilldawn.Main;
 import com.tilldawn.Model.App;
 import com.tilldawn.Model.Enemy;
+import com.tilldawn.Model.Game;
 import com.tilldawn.Model.Player;
 
 public class PlayerController {
     private Player player;
+    private Game game;
 
     public PlayerController() {
         this.player = App.getCurrentGame().getPlayer();
+        this.game = App.getCurrentGame();
     }
 
     public void update() {
@@ -47,34 +50,34 @@ public class PlayerController {
     private void handlePlayerInput() {
         boolean flag = false;
         Vector2 difference = new Vector2(0, 0);
-        if(Gdx.input.isKeyPressed(Input.Keys.W)) {
+        if(Gdx.input.isKeyPressed(game.getKeys()[0])) {
             flag = true;
             if(Gdx.input.isButtonPressed(Input.Buttons.LEFT) || App.getCurrentGame().getPreGame().isAutoReload())
-                difference = new Vector2(0, player.getSpeed());
+                difference.add(new Vector2(0, player.getSpeed()));
             else
-                difference = new Vector2(0,  2 * player.getSpeed());
+                difference.add(new Vector2(0,  2 * player.getSpeed()));
         }
-        if(Gdx.input.isKeyPressed(Input.Keys.S)) {
+        if(Gdx.input.isKeyPressed(game.getKeys()[2])) {
             flag = true;
             if(Gdx.input.isButtonPressed(Input.Buttons.LEFT) || App.getCurrentGame().getPreGame().isAutoReload())
-                difference = new Vector2(0, -player.getSpeed());
+                difference.add(new Vector2(0, -player.getSpeed()));
             else
-                difference = new Vector2(0, -2 * player.getSpeed());
+                difference.add(new Vector2(0, -2 * player.getSpeed()));
         }
-        if(Gdx.input.isKeyPressed(Input.Keys.A)) {
+        if(Gdx.input.isKeyPressed(game.getKeys()[1])) {
             if(Gdx.input.isButtonPressed(Input.Buttons.LEFT) || App.getCurrentGame().getPreGame().isAutoReload())
-                difference = new Vector2(-player.getSpeed(), 0);
+                difference.add(new Vector2(-player.getSpeed(), 0));
             else
-                difference = new Vector2(-2 * player.getSpeed(), 0);
+                difference.add(new Vector2(-2 * player.getSpeed(), 0));
 
             player.getSprite().flip(true, false);
             flag = true;
         }
-        if(Gdx.input.isKeyPressed(Input.Keys.D)) {
+        if(Gdx.input.isKeyPressed(game.getKeys()[3])) {
             if(Gdx.input.isButtonPressed(Input.Buttons.LEFT) || App.getCurrentGame().getPreGame().isAutoReload())
-                difference = new Vector2(player.getSpeed(), 0);
+                difference.add(new Vector2(player.getSpeed(), 0));
             else
-                difference = new Vector2(2 * player.getSpeed(), 0);
+                difference.add(new Vector2(2 * player.getSpeed(), 0));
 
 
             flag = true;

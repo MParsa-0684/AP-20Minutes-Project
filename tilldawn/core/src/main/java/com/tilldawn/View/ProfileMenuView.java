@@ -14,12 +14,14 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.tilldawn.Control.ProfileMenuController;
 import com.tilldawn.Main;
 import com.tilldawn.Model.App;
 import com.tilldawn.Model.Avatar;
+import com.tilldawn.Model.Pair;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -71,16 +73,17 @@ public class ProfileMenuView implements Screen {
         // Avatar selection from existing list
         avatarLabel = new Label("Choose Avatar:", skin);
         avatarSelectBox = new SelectBox<>(skin);
-        avatarSelectBox.setItems("SHANA", "DIAMOND", "SCARLET", "LILITH", "DASHER");
-        avatarSelectBox.setSelected(App.getCurrentUser().getAvatar().getName());
-        avatarPreviewImage = new Image(new TextureRegionDrawable(new TextureRegion(App.getCurrentUser().getCurrentSprite())));
+        avatarSelectBox.setItems(App.getCurrentUser().getTextures().stream().map(Pair::getKey).toArray(String[]::new));
+        avatarSelectBox.setSelected(App.getCurrentUser().getCurrentSprite().getKey());
+        avatarPreviewImage = new Image(new TextureRegionDrawable(new TextureRegion(App.getCurrentUser().getCurrentSprite().getValue())));
         avatarSelectBox.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
                 String selected = avatarSelectBox.getSelected();
-                avatarPreviewImage.setDrawable(new TextureRegionDrawable(new TextureRegion(Avatar.getAvatar(selected).getSprites().get(0).get(0))));
-                App.getCurrentUser().setAvatar(Avatar.getAvatar(selected));
-                App.getCurrentUser().setCurrentSprite(Avatar.getAvatar(selected).getSprites().get(0).get(0));
+                App.getCurrentUser().setCurrentSprite(new Pair<>(selected,
+                    new Sprite(App.getCurrentUser().findTextures(selected))));
+                avatarPreviewImage.setDrawable(new TextureRegionDrawable(new TextureRegion(
+                    App.getCurrentUser().getCurrentSprite().getValue())));
             }
         });
 
@@ -97,11 +100,12 @@ public class ProfileMenuView implements Screen {
                             File file = chooser.getSelectedFile();
                             Gdx.app.postRunnable(() -> {
                                 Texture texture = new Texture(Gdx.files.absolute(file.getAbsolutePath()));
-                                ArrayList<Texture> textures = new ArrayList<>(Arrays.asList(texture));
-                                avatarPreviewImage.setDrawable(new TextureRegionDrawable(new TextureRegion(texture)));
-                                App.getCurrentUser().setAvatar(Avatar.CUSTOM);
-                                App.getCurrentUser().getAvatar().setTextures(new ArrayList<>(Arrays.asList(textures, textures, textures)));
-                                App.getCurrentUser().setCurrentSprite(new Sprite(texture));
+                                App.getCurrentUser().getTextures().add(new Pair<>(file.getName(), texture));
+                                App.getCurrentUser().setCurrentSprite(
+                                    new Pair<>(file.getName(), new Sprite(texture)));
+                                avatarPreviewImage.setDrawable(new TextureRegionDrawable(new TextureRegion(
+                                    App.getCurrentUser().getCurrentSprite().getValue()
+                                )));
                             });
                         }
                     });

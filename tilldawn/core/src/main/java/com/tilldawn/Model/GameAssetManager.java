@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -212,6 +213,11 @@ public class GameAssetManager {
         new Texture("Sprite/Ability/Speedy.png")
     ));
 
+    private static final ArrayList<Texture> avatars = new ArrayList<>(Arrays.asList(
+        new Texture("Sprite/Avatar/IronMan_Scaled.png"),
+        new Texture("Sprite/Avatar/CaptainAmerica_Scaled.png")
+    ));
+
     public static GameAssetManager getGameAssetManager() {
         if(gameAssetManager == null) {
             gameAssetManager = new GameAssetManager();
@@ -301,6 +307,10 @@ public class GameAssetManager {
 
     public ArrayList<Texture> getAbilities() {
         return abilities;
+    }
+
+    public static ArrayList<Texture> getAvatars() {
+        return avatars;
     }
 }
 

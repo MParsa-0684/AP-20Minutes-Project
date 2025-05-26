@@ -25,8 +25,9 @@ public class SettingsMenuController {
         App.getCurrentUser().getPreGame().setSfxMusic(view.getSfxButton().isChecked());
         App.getCurrentUser().getPreGame().setAutoReload(view.getAutoReloadCheckBox().isChecked());
         App.getCurrentUser().getPreGame().setGameColor((view.getGameThemeCheckBox().isChecked()) ? Color.BLACK : Color.WHITE);
-        App.getCurrentUser().getPreGame().setGameKeys(view.getGameKeysButtons().getText());
-
+        if(view.getGameKeysButtons().getText().matches("\\S-\\S-\\S-\\S")) {
+            App.getCurrentUser().getPreGame().setGameKeys(view.getGameKeysButtons().getText());
+        }
         if(view.getBackButton().isChecked()) {
             view.getBackButton().setChecked(false);
             Main.getMain().getScreen().dispose();

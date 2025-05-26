@@ -26,9 +26,6 @@ public class WinLoseController {
             App.getBackgroundMusic().setVolume(volume);
             App.getBackgroundMusic().play();
 
-            App.getCurrentGame().getPlayer().getSprite().setSize(App.getCurrentGame().getPlayer().getSprite().getWidth() / 2.5f,
-                App.getCurrentGame().getPlayer().getSprite().getHeight() / 2.5f);
-
             App.getCurrentUser().setGameView(null);
             App.setCurrentGame(null);
             App.getCurrentUser().increaseScore(view.getScore());
@@ -55,8 +52,6 @@ public class WinLoseController {
             App.getBackgroundMusic().setVolume(volume);
             App.getBackgroundMusic().play();
 
-            App.getCurrentGame().getPlayer().getSprite().setSize(App.getCurrentGame().getPlayer().getSprite().getWidth() / 2.5f,
-                App.getCurrentGame().getPlayer().getSprite().getHeight() / 2.5f);
 
             App.getCurrentUser().setGameView(null);
             App.setCurrentGame(null);

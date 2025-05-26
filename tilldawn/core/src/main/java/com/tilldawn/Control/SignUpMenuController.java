@@ -9,17 +9,6 @@ import com.tilldawn.View.SignUpMenuView;
 import java.util.Random;
 
 public class SignUpMenuController extends Controller {
-    private Avatar getRandomAvatar(){
-        Random random = new Random();
-        int rand = random.nextInt(5);
-        int ptr = 0;
-        for (Avatar value : Avatar.values()) {
-            if(ptr == rand)
-                return value;
-            ptr++;
-        }
-        return null;
-    }
 
     private SignUpMenuView view;
 
@@ -48,15 +37,14 @@ public class SignUpMenuController extends Controller {
                 view.getUsernameTextField().getText(),
                 view.getPasswordTextField().getText(),
                 view.getSecurityQuestions().getSelected(),
-                view.getSecurityAnswerTextField().getText(),
-                getRandomAvatar()
+                view.getSecurityAnswerTextField().getText()
             ));
 
             view.getErrorLabel().setText("Your account has been successfully registered!");
         }
         else if(view.getGuestButton().isChecked()) {
             view.getGuestButton().setChecked(false);
-            App.setCurrentUser(new User("Guest", "Guest", "null", "null", null));
+            App.setCurrentUser(new User("Guest", "Guest", "null", "null"));
             Main.getMain().getScreen().dispose();
             Main.getMain().setScreen(new MainMenuView(new MainMenuController(), GameAssetManager.getGameAssetManager().getMenuSkin()));
         }

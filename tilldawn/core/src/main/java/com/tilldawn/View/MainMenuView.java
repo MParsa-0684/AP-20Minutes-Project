@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.tilldawn.Control.MainMenuController;
@@ -87,7 +86,7 @@ public class MainMenuView implements Screen {
         rightColumn.defaults().pad(10).fillX();
 
         rightColumn.row();
-        Sprite sprite = App.getCurrentUser().getCurrentSprite();
+        Sprite sprite = App.getCurrentUser().getCurrentSprite().getValue();
         Image avatarImage = new Image(new TextureRegionDrawable(new TextureRegion(sprite)));
 
         rightColumn.add(avatarImage).size(sprite.getWidth() * 2, sprite.getHeight() * 2).center().row();

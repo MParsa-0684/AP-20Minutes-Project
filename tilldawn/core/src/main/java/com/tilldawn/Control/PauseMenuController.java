@@ -43,11 +43,6 @@ public class PauseMenuController{
                 App.getBackgroundMusic().setVolume(volume);
                 App.getBackgroundMusic().play();
 
-
-
-                App.getCurrentGame().getPlayer().getSprite().setSize(App.getCurrentGame().getPlayer().getSprite().getWidth() / 2.5f,
-                    App.getCurrentGame().getPlayer().getSprite().getHeight() / 2.5f);
-
                 view.getSaveQuitButton().setChecked(false);
                 App.setCurrentGame(null);
                 Main.getMain().getScreen().dispose();

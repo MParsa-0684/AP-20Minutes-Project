@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class Player {
@@ -31,7 +32,7 @@ public class Player {
         this.weapon = weapon;
         this.health = avatar.getHP();
         this.speed = avatar.getSpeed();
-        this.sprite = App.getCurrentUser().getCurrentSprite();
+        this.sprite = App.getCurrentUser().getAvatar().getSprites().get(0).get(0);
         this.sprite.setPosition((float) Gdx.graphics.getWidth() / 2, (float) Gdx.graphics.getHeight() / 2);
         this.sprite.setSize(sprite.getWidth() * 2.5f, sprite.getHeight() * 2.5f);
         this.collisionRect = new CollisionRect(this.sprite.getX(), this.sprite.getY(), this.sprite.getWidth(), this.sprite.getHeight());

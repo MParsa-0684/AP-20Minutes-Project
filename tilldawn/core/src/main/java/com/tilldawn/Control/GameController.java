@@ -65,7 +65,7 @@ public class GameController {
             Main.getMain().setScreen(new WinLoseView(new WinLoseController(), GameAssetManager.getGameAssetManager().getMenuSkin(), false));
             return;
         }
-        if(game.getCurrentTime() == game.getGameTime()) {
+        if(game.getGameTime() * 60 - game.getCurrentTime() <= 0.017) {
             Main.getMain().getScreen().dispose();
             Main.getMain().setScreen(new WinLoseView(new WinLoseController(), GameAssetManager.getGameAssetManager().getMenuSkin(), true));
             return;

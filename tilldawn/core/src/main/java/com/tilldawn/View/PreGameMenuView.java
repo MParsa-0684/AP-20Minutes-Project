@@ -2,18 +2,15 @@ package com.tilldawn.View;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.tilldawn.Control.PreGameMenuController;
 import com.tilldawn.Main;
 import com.tilldawn.Model.App;
 import com.tilldawn.Model.Avatar;
-import org.w3c.dom.Text;
 
 public class PreGameMenuView implements Screen {
     private PreGameMenuController controller;
@@ -42,16 +39,6 @@ public class PreGameMenuView implements Screen {
 
         heroSelectBox   = new SelectBox<>(skin);
         heroSelectBox.setItems("SHANA", "DIAMOND", "SCARLET", "LILITH", "DASHER");
-        if(!Avatar.CUSTOM.getTextures().isEmpty())
-            heroSelectBox.setItems("CUSTOM");
-        heroSelectBox.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeListener.ChangeEvent event, Actor actor) {
-                String selected = heroSelectBox.getSelected();
-                App.getCurrentUser().setAvatar(Avatar.getAvatar(selected));
-                App.getCurrentUser().setCurrentSprite(Avatar.getAvatar(selected).getSprites().get(0).get(0));
-            }
-        });
 
         weaponSelectBox = new SelectBox<>(skin);
         weaponSelectBox.setItems("REVOLVER", "SHOTGUN", "SMG_DUAL");
@@ -63,7 +50,7 @@ public class PreGameMenuView implements Screen {
         gameButton     = new TextButton("Start Game", skin);
         settingsButton = new TextButton("Settings",    skin);
 
-        heroSelectBox.setSelected(App.getCurrentUser().getAvatar().getName());
+        heroSelectBox.setSelected("SHANA");
         weaponSelectBox.setSelected("Revolver");
         timeSelectBox.setSelected("2");
         errorLabel = new Label((App.getCurrentUser().getGameView() != null) ? "Your saved game will be eliminated!" : "", skin);

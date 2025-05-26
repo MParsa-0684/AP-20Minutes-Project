@@ -3,11 +3,16 @@ package com.tilldawn.View;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.tilldawn.Control.PauseMenuController;
 import com.tilldawn.Main;
+import com.tilldawn.Model.Ability;
 import com.tilldawn.Model.App;
+
+import java.util.ArrayList;
 
 public class PauseMenuView implements Screen {
     private Stage stage;
@@ -47,16 +52,19 @@ public class PauseMenuView implements Screen {
 
         this.abilitiesLabel = new Label("All Abilities Gained", skin);
         Table allAbilTable = new Table(skin);
-        allAbilTable.defaults().pad(4);
-//        for (Ability a : App.getCurrentGame().getPlayer().getAbilities()) {
-//            // assume you have a TextureRegionDrawable icon for each ability
-//            ImageButton icon = new ImageButton(new TextureRegionDrawable(a.getIcon()));
-//            allAbilTable.add(icon);
-//        }
+        allAbilTable.defaults().pad(4).size(50, 50);
+        App.getCurrentGame().getPlayer().getAbilities().forEach((key, value) -> {
+            for (Ability ability : value) {
+                Sprite sprite = new Sprite(ability.getType().getTexture());
+                ImageButton icon = new ImageButton(new TextureRegionDrawable(sprite));
+                allAbilTable.add(icon);
+            }
+            allAbilTable.row();
+        });
+
         this.abilitiesScrollPane = new ScrollPane(allAbilTable, skin);
         pauseWindow.add(this.abilitiesLabel).left().colspan(2).row();
         pauseWindow.add(this.abilitiesScrollPane).colspan(2).height(100).row();
-
 
         this.gameThemeCheckBox = new CheckBox("Black & White Mode", skin);
         if(App.getCurrentUser().getPreGame().getGameColor() == Color.BLACK)

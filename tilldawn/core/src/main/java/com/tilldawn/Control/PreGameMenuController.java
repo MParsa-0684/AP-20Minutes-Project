@@ -39,7 +39,7 @@ public class PreGameMenuController {
                 App.getCurrentUser().getPreGame().copy(),
                 Integer.parseInt(view.getTimeSelectBox().getSelected()),
                 new Player(
-                    App.getCurrentUser().getAvatar(),
+                    Avatar.valueOf(view.getHeroSelectBox().getSelected()),
                     new Weapon(WeaponType.valueOf(view.getWeaponSelectBox().getSelected()))
                 )
             );

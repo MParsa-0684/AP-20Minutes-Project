@@ -1,33 +1,46 @@
 package com.tilldawn.Model;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.tilldawn.View.GameView;
 
+import java.util.ArrayList;
+import java.util.Random;
+
 public class User {
+    private Avatar avatar;
     private String username;
     private String password;
     private String securityQuestion;
     private String securityAnswer;
-    private Avatar avatar;
     private GameView gameView;
     private int score;
-    private Sprite currentSprite;
+    private Pair<String, Sprite> currentSprite;
+    private ArrayList<Pair<String, Texture>> textures;
     private int killCount;
     private int maxTimeSpent;
     private PreGame preGame;
 
-    public User(String username, String password, String securityQuestion, String securityAnswer, Avatar avatar) {
+    public User(String username, String password, String securityQuestion, String securityAnswer) {
         this.username = username;
         this.password = password;
         this.securityQuestion = securityQuestion;
         this.securityAnswer = securityAnswer;
-        this.avatar = avatar;
-        this.currentSprite = avatar.getSprites().get(0).get(0);
+        this.textures = new ArrayList<>();
+        this.textures.add(new Pair<>("Iron_Man", GameAssetManager.getAvatars().get(0)));
+        this.textures.add(new Pair<>("Capitan_America", GameAssetManager.getAvatars().get(1)));
+        Pair<String, Texture> randomTexture = this.getTextures().get((new Random()).nextInt(this.getTextures().size()));
+        this.currentSprite = new Pair<>(randomTexture.getKey(), new Sprite(randomTexture.getValue()));
+        this.currentSprite.getValue().setSize(
+            this.currentSprite.getValue().getWidth() / 30,
+            this.currentSprite.getValue().getHeight() / 30);
+
         this.gameView = null;
         this.score = 0;
         this.killCount = 0;
         this.maxTimeSpent = 0;
         this.preGame = new PreGame();
+        this.avatar = Avatar.SHANA;
     }
 
     public String getUsername() {
@@ -62,14 +75,6 @@ public class User {
         this.securityAnswer = securityAnswer;
     }
 
-    public Avatar getAvatar() {
-        return avatar;
-    }
-
-    public void setAvatar(Avatar avatar) {
-        this.avatar = avatar;
-    }
-
     public GameView getGameView() {
         return gameView;
     }
@@ -82,12 +87,15 @@ public class User {
         return score;
     }
 
-    public Sprite getCurrentSprite() {
+    public Pair<String, Sprite> getCurrentSprite() {
         return currentSprite;
     }
 
-    public void setCurrentSprite(Sprite currentSprite) {
+    public void setCurrentSprite(Pair<String, Sprite> currentSprite) {
         this.currentSprite = currentSprite;
+        this.currentSprite.getValue().setSize(
+            App.getCurrentUser().getCurrentSprite().getValue().getWidth() / 30,
+            App.getCurrentUser().getCurrentSprite().getValue().getHeight() / 30);
     }
 
     public int getKillCount() {
@@ -108,5 +116,26 @@ public class User {
 
     public void updateMaxTimeSpent(int maxTimeSpent) {
         this.maxTimeSpent = Math.max(maxTimeSpent, this.maxTimeSpent);
+    }
+
+    public ArrayList<Pair<String, Texture>> getTextures() {
+        return textures;
+    }
+
+    public Avatar getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(Avatar avatar) {
+        this.avatar = avatar;
+    }
+
+    public Texture findTextures(String selected) {
+        for (Pair<String, Texture> texture : textures) {
+            if(texture.getKey().equals(selected)) {
+                return texture.getValue();
+            }
+        }
+        return null;
     }
 }
