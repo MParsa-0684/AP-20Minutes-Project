@@ -16,6 +16,7 @@ public class Enemy {
     private Sprite sprite;
     private float time;
     private int HP;
+    private float killedTime;
 
     public Enemy(EnemyType enemyType, Vector2 position) {
         this.enemyType = enemyType;
@@ -24,6 +25,8 @@ public class Enemy {
         sprite.setPosition(position.x, position.y);
         this.collisionRect = new CollisionRect(sprite.getX(), sprite.getY(), sprite.getWidth() / 3, sprite.getHeight() / 3);
         this.HP = enemyType.getHP();
+        this.killedTime = 0f;
+        this.time = 0f;
     }
 
     public EnemyType getEnemyType() {
@@ -63,5 +66,13 @@ public class Enemy {
 
     public int getHP() {
         return HP;
+    }
+
+    public float getKilledTime() {
+        return killedTime;
+    }
+
+    public void setKilledTime(float killedTime) {
+        this.killedTime = killedTime;
     }
 }

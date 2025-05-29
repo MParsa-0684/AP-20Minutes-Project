@@ -7,10 +7,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.tilldawn.Main;
-import com.tilldawn.Model.App;
-import com.tilldawn.Model.Enemy;
-import com.tilldawn.Model.Game;
-import com.tilldawn.Model.Player;
+import com.tilldawn.Model.*;
 
 public class PlayerController {
     private Player player;
@@ -33,7 +30,9 @@ public class PlayerController {
 
         handlePlayerInput();
 
+        player.getShadow().draw(Main.getBatch());
         player.getSprite().draw(Main.getBatch());
+
 
         if(player.isIdle()) {
             animation(0);
@@ -79,11 +78,41 @@ public class PlayerController {
             else
                 difference.add(new Vector2(2 * player.getSpeed(), 0));
 
-
             flag = true;
+        }
+        // Cheat Codes
+        // Decrease Time: T
+        if(Gdx.input.isKeyJustPressed(Input.Keys.T)) {
+            App.getCurrentGame().setCurrentTime(Math.max(0, App.getCurrentGame().getCurrentTime() - 60));
+        }
+        // Level Up : L
+        if(Gdx.input.isKeyJustPressed(Input.Keys.L)) {
+            App.getCurrentGame().getPlayer().setXp(
+                player.getXp() +
+                    10 * (App.getCurrentGame().getPlayer().getLevel() + 1) * App.getCurrentGame().getPlayer().getLevel()
+            );
+        }
+        // Increase Health : H
+        if(Gdx.input.isKeyJustPressed(Input.Keys.H)) {
+            player.setHealth(player.getHealth() + 1);
+        }
+        // Boss fight: B
+        if(Gdx.input.isKeyJustPressed(Input.Keys.B)) {
+            //TODO: Boss Fight
+        }
+        // Infinite Ammo : G
+        if(Gdx.input.isKeyJustPressed(Input.Keys.G)) {
+            player.getWeapon().setMaxAmmo(Integer.MAX_VALUE);
+            player.getWeapon().setAmmo(Integer.MAX_VALUE);
         }
 
         player.update(difference);
+
+        if(flag && App.getCurrentGame().getPreGame().isSfxMusic()) {
+            GameAssetManager.getGameAssetManager().getWalk1().play(0.2f);
+            GameAssetManager.getGameAssetManager().getWalk2().play(0.2f);
+            GameAssetManager.getGameAssetManager().getWalk3().play(0.2f);
+        }
 
         if(flag && (Gdx.input.isButtonPressed(Input.Buttons.LEFT) || App.getCurrentGame().getPreGame().isAutoReload())) {
             player.setIdle(false);

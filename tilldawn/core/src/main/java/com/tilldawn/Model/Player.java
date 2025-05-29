@@ -26,6 +26,7 @@ public class Player {
     private boolean invincible;
     private float invincibleTime;
     private int xp;
+    private Sprite shadow;
 
     public Player(Avatar avatar, Weapon weapon) {
         this.avatar = avatar;
@@ -34,6 +35,8 @@ public class Player {
         this.speed = avatar.getSpeed();
         this.sprite = App.getCurrentUser().getAvatar().getSprites().get(0).get(0);
         this.sprite.setPosition((float) Gdx.graphics.getWidth() / 2, (float) Gdx.graphics.getHeight() / 2);
+        this.shadow = new Sprite(GameAssetManager.getShadow());
+        this.shadow.setPosition(this.sprite.getX() - 20, this.sprite.getY() - 20);
         this.sprite.setSize(sprite.getWidth() * 2.5f, sprite.getHeight() * 2.5f);
         this.collisionRect = new CollisionRect(this.sprite.getX(), this.sprite.getY(), this.sprite.getWidth(), this.sprite.getHeight());
         this.isIdle = true;
@@ -51,6 +54,7 @@ public class Player {
         this.invincibleTime = 0;
         this.xp = 0;
         this.killed = 0;
+
     }
 
     public Avatar getAvatar() {
@@ -124,6 +128,7 @@ public class Player {
     public void update(Vector2 difference) {
         this.getPosition().set(this.getPosition().x + difference.x, this.getPosition().y + difference.y);
         this.sprite.setPosition(this.getPosition().x, this.getPosition().y);
+        this.shadow.setPosition(this.getPosition().x - 50, this.getPosition().y - 40);
         this.getCollisionRect().update(this.getSprite().getX(),
             this.getSprite().getY(), this.getSprite().getWidth(), this.getSprite().getHeight());
     }
@@ -178,5 +183,9 @@ public class Player {
 
     public void setHealth(int health) {
         this.health = health;
+    }
+
+    public Sprite getShadow() {
+        return shadow;
     }
 }

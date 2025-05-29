@@ -16,11 +16,13 @@ public class EnemyController {
     private ArrayList<Enemy> enemies;
     private PlayerController playerController;
     private ArrayList<Bullet> enemyBullets;
+    private ArrayList<Enemy> killedEnemies;
 
     public EnemyController(PlayerController playerController) {
         this.enemies = new ArrayList<>();
         this.playerController = playerController;
         this.enemyBullets = new ArrayList<>();
+        this.killedEnemies = new ArrayList<>();
 
         Random rand = new Random();
         for (int i = 1; i < 101; i++) {
@@ -46,6 +48,21 @@ public class EnemyController {
     }
 
     public void update() {
+        ArrayList<Enemy> tempEnemies = new ArrayList<>();
+        for (Enemy killedEnemy : killedEnemies) {
+            boolean flag = animation(killedEnemy);
+            killedEnemy.getSprite().setScale(2f);
+            killedEnemy.getSprite().draw(Main.getBatch());
+            if(flag) {
+                tempEnemies.add(killedEnemy);
+            }
+        }
+
+        for (Enemy tempEnemy : tempEnemies) {
+            killedEnemies.remove(tempEnemy);
+        }
+        tempEnemies.clear();
+
         generateRandomEnemies();
 
         for (Enemy enemy : enemies) {
@@ -200,7 +217,30 @@ public class EnemyController {
         }
     }
 
+    private boolean animation(Enemy enemy) {
+        Array<Texture> regions = new Array<>(GameAssetManager.getGameAssetManager().getDeath().size());
+        GameAssetManager.getGameAssetManager().getDeath().forEach(regions::add);
+        Animation<Texture> animation = new Animation<>(0.1f, regions);
+
+        enemy.getSprite().setRegion(animation.getKeyFrame(enemy.getKilledTime()));
+
+        if(!animation.isAnimationFinished(enemy.getKilledTime())) {
+            enemy.setKilledTime(enemy.getKilledTime() + Gdx.graphics.getDeltaTime());
+        }
+        else {
+            enemy.setKilledTime(0);
+            return true;
+        }
+
+        animation.setPlayMode(Animation.PlayMode.LOOP);
+        return false;
+    }
+
     public ArrayList<Enemy> getEnemies() {
         return enemies;
+    }
+
+    public ArrayList<Enemy> getKilledEnemies() {
+        return killedEnemies;
     }
 }

@@ -9,6 +9,7 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.tilldawn.Control.SignUpMenuController;
 import com.tilldawn.Main;
+import com.tilldawn.Model.GameAssetManager;
 
 public class SignUpMenuView implements Screen {
     private Stage stage;
@@ -43,7 +44,6 @@ public class SignUpMenuView implements Screen {
         this.signUpButton = new TextButton("Sign Up", skin);
         this.loginButton = new TextButton("Login Menu", skin);
         this.errorLabel = new Label("", skin);
-
 
         controller.setView(this);
     }
@@ -90,6 +90,9 @@ public class SignUpMenuView implements Screen {
     public void render(float v) {
         ScreenUtils.clear(35 / 255f, 29 / 255f, 42 / 255f, 1);
         Main.getBatch().begin();
+        GameAssetManager.getGameAssetManager().getBackground().setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        GameAssetManager.getGameAssetManager().getBackground().setPosition(0, 0);
+        GameAssetManager.getGameAssetManager().getBackground().draw(Main.getBatch());
         Main.getBatch().end();
         stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
         stage.draw();

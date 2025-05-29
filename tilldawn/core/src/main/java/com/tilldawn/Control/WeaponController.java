@@ -117,6 +117,8 @@ public class WeaponController {
             weapon.setNeedsReload(true);
             return;
         }
+        if(App.getCurrentGame().getPreGame().isSfxMusic())
+            GameAssetManager.getGameAssetManager().getShoot().play(1.0f);
 
         for (int i = 0; i < weapon.getProjectile(); i++) {
             Vector3 world = new Vector3(x, Gdx.graphics.getHeight() - y, 0);
@@ -181,6 +183,9 @@ public class WeaponController {
 
             for (Enemy tempEnemy : tempEnemies) {
                 enemyController.getEnemies().remove(tempEnemy);
+                enemyController.getKilledEnemies().add(tempEnemy);
+                if(App.getCurrentGame().getPreGame().isSfxMusic())
+                    GameAssetManager.getGameAssetManager().getEnemyKilled().play(1.0f);
             }
 
             if(flag) {

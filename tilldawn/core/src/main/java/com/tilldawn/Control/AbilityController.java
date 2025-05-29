@@ -3,6 +3,7 @@ package com.tilldawn.Control;
 import com.tilldawn.Model.Ability;
 import com.tilldawn.Model.AbilityType;
 import com.tilldawn.Model.App;
+import com.tilldawn.Model.GameAssetManager;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -27,6 +28,9 @@ public class AbilityController {
     private void updateLevel() {
         int currentLevelXP = 10 * (App.getCurrentGame().getPlayer().getLevel() - 1) * App.getCurrentGame().getPlayer().getLevel();
         if(App.getCurrentGame().getPlayer().getXp() - currentLevelXP >= App.getCurrentGame().getPlayer().getLevel() * 20) {
+            if(App.getCurrentGame().getPreGame().isSfxMusic())
+                GameAssetManager.getGameAssetManager().getLevelUp().play(1.0f);
+
             App.getCurrentGame().getPlayer().setLevel(App.getCurrentGame().getPlayer().getLevel() + 1);
             App.getCurrentUser().getGameView().getLevelProgressBar().setRange(0, App.getCurrentGame().getPlayer().getLevel() * 20);
             App.getCurrentUser().getGameView().getLevelProgressBar().setValue(0);

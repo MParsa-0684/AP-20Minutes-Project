@@ -61,6 +61,8 @@ public class GameController {
 
     private void checkWinLose() {
         if(game.getPlayer().getHealth() <= 0) {
+            if(App.getCurrentGame().getPreGame().isSfxMusic())
+                GameAssetManager.getGameAssetManager().getPlayerKilled().play(1.0f);
             Main.getMain().getScreen().dispose();
             Main.getMain().setScreen(new WinLoseView(new WinLoseController(), GameAssetManager.getGameAssetManager().getMenuSkin(), false));
             return;

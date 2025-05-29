@@ -8,6 +8,7 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.tilldawn.Control.LoginMenuController;
 import com.tilldawn.Main;
+import com.tilldawn.Model.GameAssetManager;
 
 public class LoginMenuView implements Screen {
     private Stage stage;
@@ -74,6 +75,7 @@ public class LoginMenuView implements Screen {
     public void render(float v) {
         ScreenUtils.clear(35 / 255f, 29 / 255f, 42 / 255f, 1);
         Main.getBatch().begin();
+        GameAssetManager.getGameAssetManager().getBackground().draw(Main.getBatch());
         Main.getBatch().end();
         stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
         stage.draw();

@@ -1,7 +1,9 @@
 package com.tilldawn.Model;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
 import java.lang.reflect.Array;
@@ -218,6 +220,45 @@ public class GameAssetManager {
         new Texture("Sprite/Avatar/CaptainAmerica_Scaled.png")
     ));
 
+    private static final Texture cursor = new Texture("Sprite/T/T_Cursor.png");
+
+    private static final Texture shadow = new Texture("Sprite/Shader/Untitled-1.png");
+
+    private final ArrayList<Texture> death = new ArrayList<>(Arrays.asList(
+        new Texture("Sprite/DeathFX/DeathFX_0.png"),
+        new Texture("Sprite/DeathFX/DeathFX_1.png"),
+        new Texture("Sprite/DeathFX/DeathFX_2.png"),
+        new Texture("Sprite/DeathFX/DeathFX_3.png")
+    ));
+
+    private final Texture playerDeath = new Texture("Sprite/Death/Icon_DeathPlague.png");
+
+    private final Sprite background = new Sprite(new Texture("Sprite/Background/background.png"));
+
+    private final Sound enemyKilled = Gdx.audio.newSound(Gdx.files.internal("AudioClip/Blood_Splash_Quick_01.wav"));
+
+    private final Sound playerKilled = Gdx.audio.newSound(Gdx.files.internal("AudioClip/Explosion_Blood_01.wav"));
+
+    private final Sound coins = Gdx.audio.newSound(Gdx.files.internal("AudioClip/Coins (10).wav"));
+
+    private final Sound levelUp = Gdx.audio.newSound(Gdx.files.internal("AudioClip/Special & Powerup (8).wav"));
+
+    private final Sound walk1 = Gdx.audio.newSound(Gdx.files.internal("AudioClip/Footsteps_Casual_Grass_01.wav"));
+
+    private final Sound walk2 = Gdx.audio.newSound(Gdx.files.internal("AudioClip/Footsteps_Casual_Grass_02.wav"));
+
+    private final Sound walk3 = Gdx.audio.newSound(Gdx.files.internal("AudioClip/Footsteps_Casual_Grass_03.wav"));
+
+    private final Sound shoot = Gdx.audio.newSound(Gdx.files.internal("AudioClip/single_shot.wav"));
+
+    private final ArrayList<Texture> heros = new ArrayList<>(Arrays.asList(
+        new Texture("Sprite/T/T_Shana_Portrait.png"),
+        new Texture("Sprite/T/T_Diamond_Portrait.png"),
+        new Texture("Sprite/T/T_Scarlett_Portrait.png"),
+        new Texture("Sprite/T/T_Lilith_Portrait.png"),
+        new Texture("Sprite/T/T_Dasher_Portrait.png")
+    ));
+
     public static GameAssetManager getGameAssetManager() {
         if(gameAssetManager == null) {
             gameAssetManager = new GameAssetManager();
@@ -311,6 +352,62 @@ public class GameAssetManager {
 
     public static ArrayList<Texture> getAvatars() {
         return avatars;
+    }
+
+    public static Texture getCursor() {
+        return cursor;
+    }
+
+    public static Texture getShadow() {
+        return shadow;
+    }
+
+    public ArrayList<Texture> getDeath() {
+        return death;
+    }
+
+    public Texture getPlayerDeath() {
+        return playerDeath;
+    }
+
+    public Sprite getBackground() {
+        return background;
+    }
+
+    public Sound getEnemyKilled() {
+        return enemyKilled;
+    }
+
+    public Sound getPlayerKilled() {
+        return playerKilled;
+    }
+
+    public Sound getCoins() {
+        return coins;
+    }
+
+    public Sound getLevelUp() {
+        return levelUp;
+    }
+
+    public Sound getWalk1() {
+        return walk1;
+    }
+
+    public Sound getWalk2() {
+        return walk2;
+    }
+
+    public Sound getWalk3() {
+        return walk3;
+    }
+
+    public Sound getShoot() {
+        return shoot;
+    }
+
+    public ArrayList<Texture> getHeros() {
+        return heros;
     }
 }
 

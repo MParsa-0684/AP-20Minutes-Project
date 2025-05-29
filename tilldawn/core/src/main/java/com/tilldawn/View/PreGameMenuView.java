@@ -11,6 +11,7 @@ import com.tilldawn.Control.PreGameMenuController;
 import com.tilldawn.Main;
 import com.tilldawn.Model.App;
 import com.tilldawn.Model.Avatar;
+import com.tilldawn.Model.GameAssetManager;
 
 public class PreGameMenuView implements Screen {
     private PreGameMenuController controller;
@@ -101,6 +102,7 @@ public class PreGameMenuView implements Screen {
     public void render(float v) {
         ScreenUtils.clear(35 / 255f, 29 / 255f, 42 / 255f, 1);
         Main.getBatch().begin();
+        GameAssetManager.getGameAssetManager().getBackground().draw(Main.getBatch());
         Main.getBatch().end();
         stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
         stage.draw();

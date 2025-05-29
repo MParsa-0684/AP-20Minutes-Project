@@ -40,7 +40,7 @@ public class WinLoseView implements Screen {
         winLoseWindow.setMovable(false);
         winLoseWindow.defaults().pad(8).fillX();
 
-        this.winLoseLabel = new Label((win ? "YOU WON!" : "YOU LOST!"), skin);
+        this.winLoseLabel = new Label((win ? "YOU WON " : "YOU LOST ") + App.getCurrentUser().getUsername() + "!", skin);
         this.winLoseLabel.setFontScale(2f);
         this.timeSurvivedTitleLabel = new Label("Time Survived:", skin);
         this.timeSurvivedTitleLabel.setColor(124,153,118, 1);
@@ -59,8 +59,7 @@ public class WinLoseView implements Screen {
         this.levelNumberLabel = new Label(String.valueOf(App.getCurrentGame().getPlayer().getLevel()), skin);
         this.levelNumberLabel.setColor(244,234,211, 1);
 
-        score = ((int) App.getCurrentGame().getCurrentTime()) + App.getCurrentGame().getPlayer().getKilled() +
-            App.getCurrentGame().getPlayer().getLevel();
+        score = ((int) App.getCurrentGame().getCurrentTime()) * App.getCurrentGame().getPlayer().getKilled();
         timeSurvived = App.getCurrentGame().getCurrentTime();
 
         this.scoreTitleLabel = new Label("Score Earned", skin);

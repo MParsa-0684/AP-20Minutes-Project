@@ -5,7 +5,9 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.graphics.Cursor;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
@@ -27,6 +29,16 @@ public class Main extends Game {
         App.getBackgroundMusic().setLooping(true);
         App.getBackgroundMusic().setVolume(0.5f);
         App.getBackgroundMusic().play();
+
+        Pixmap pixmap = new Pixmap(Gdx.files.internal("Sprite/T/T_Cursor.png"));
+        int xHotspot = 16;
+        int yHotspot = 16;
+
+        Cursor cursor = Gdx.graphics.newCursor(pixmap, xHotspot, yHotspot);
+
+        Gdx.graphics.setCursor(cursor);
+
+        pixmap.dispose();
         main.setScreen(new SignUpMenuView(new SignUpMenuController(), GameAssetManager.getGameAssetManager().getMenuSkin()));
     }
 

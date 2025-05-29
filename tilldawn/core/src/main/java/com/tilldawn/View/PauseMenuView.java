@@ -39,13 +39,13 @@ public class PauseMenuView implements Screen {
         pauseWindow.add(titleLabel).center().colspan(2).expandX().center().padBottom(10).row();
         resumeButton = new TextButton("Resume", skin);
         pauseWindow.add(resumeButton).row();
-        cheatLabel = new Label("", skin); //TODO
+        cheatLabel = new Label("", skin);
         pauseWindow.add(cheatLabel).row();
-        abilitiesLabel = new Label("", skin); //TODO
+        abilitiesLabel = new Label("", skin);
         pauseWindow.add(cheatLabel).row();
 
         List<String> cheatList = new List<>(skin);
-        cheatList.setItems("GODMODE","INFINITE_AMMO","NOCLIP"); // example
+        cheatList.setItems("Decrease Time: T","Level Up : L","Increase Health : H", "Boss fight: B", "Infinite Ammo : G");
         this.cheatScrollPane = new ScrollPane(cheatList, skin);
         pauseWindow.add(cheatLabel).left().colspan(2).row();
         pauseWindow.add(cheatScrollPane).colspan(2).height(100).row();
