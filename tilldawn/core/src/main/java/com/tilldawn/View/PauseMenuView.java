@@ -3,7 +3,9 @@ package com.tilldawn.View;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
@@ -11,6 +13,7 @@ import com.tilldawn.Control.PauseMenuController;
 import com.tilldawn.Main;
 import com.tilldawn.Model.Ability;
 import com.tilldawn.Model.App;
+import com.tilldawn.Model.GameAssetManager;
 
 import java.util.ArrayList;
 
@@ -45,7 +48,7 @@ public class PauseMenuView implements Screen {
         pauseWindow.add(cheatLabel).row();
 
         List<String> cheatList = new List<>(skin);
-        cheatList.setItems("Decrease Time: T","Level Up : L","Increase Health : H", "Boss fight: B", "Infinite Ammo : G");
+        cheatList.setItems("Decrease Time: 1","Level Up : 2","Increase Health : 3", "Boss fight: 4", "Infinite Ammo : 5");
         this.cheatScrollPane = new ScrollPane(cheatList, skin);
         pauseWindow.add(cheatLabel).left().colspan(2).row();
         pauseWindow.add(cheatScrollPane).colspan(2).height(100).row();
@@ -100,6 +103,9 @@ public class PauseMenuView implements Screen {
 //        ScreenUtils.clear(35 / 255f, 29 / 255f, 42 / 255f, 1);
         Main.getBatch().begin();
         Main.getBatch().end();
+
+        GameAssetManager.getGameAssetManager().setColorFunction();
+
         stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
         stage.draw();
         controller.handlePause();

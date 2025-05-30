@@ -2,8 +2,11 @@ package com.tilldawn.Model;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
 import java.lang.reflect.Array;
@@ -13,6 +16,7 @@ import java.util.Arrays;
 public class GameAssetManager {
     private static GameAssetManager gameAssetManager;
     private static final Skin menuSkin = new Skin(Gdx.files.internal("skin/tracer-ui.json"));
+    private final ShapeRenderer shapeRenderer = new ShapeRenderer();
     private final ArrayList<ArrayList<Texture>> shana = createHeroTextures(new String[][]{
         {
             "Heros/Shana/idle/Idle_0 #8330.png",
@@ -264,6 +268,17 @@ public class GameAssetManager {
             gameAssetManager = new GameAssetManager();
         }
         return gameAssetManager;
+    }
+
+    public void setColorFunction() {
+        if(App.getCurrentUser().getPreGame().getGameColor() == Color.BLACK) {
+            Gdx.gl.glEnable(GL20.GL_BLEND);
+            shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+            shapeRenderer.setColor(0, 0, 0, 0.5f);
+            shapeRenderer.rect(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+            shapeRenderer.end();
+            Gdx.gl.glDisable(GL20.GL_BLEND);
+        }
     }
 
     public Skin getMenuSkin() {

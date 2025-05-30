@@ -12,9 +12,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.tilldawn.Control.GameController;
 import com.tilldawn.Main;
-import com.tilldawn.Model.Ability;
-import com.tilldawn.Model.AbilityType;
-import com.tilldawn.Model.App;
+import com.tilldawn.Model.*;
 import com.tilldawn.Model.Game;
 
 
@@ -122,6 +120,8 @@ public class GameView implements Screen, InputProcessor {
 
 
         Main.getBatch().end();
+
+        GameAssetManager.getGameAssetManager().setColorFunction();
 
         healthLabel.setText("HP : " + App.getCurrentGame().getPlayer().getHealth());
         levelLabel.setText("Level : " + App.getCurrentGame().getPlayer().getLevel());

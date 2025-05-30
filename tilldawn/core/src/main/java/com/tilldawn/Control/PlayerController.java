@@ -82,26 +82,26 @@ public class PlayerController {
         }
         // Cheat Codes
         // Decrease Time: T
-        if(Gdx.input.isKeyJustPressed(Input.Keys.T)) {
+        if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_1)) {
             App.getCurrentGame().setCurrentTime(Math.max(0, App.getCurrentGame().getCurrentTime() - 60));
         }
         // Level Up : L
-        if(Gdx.input.isKeyJustPressed(Input.Keys.L)) {
+        if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_2)) {
             App.getCurrentGame().getPlayer().setXp(
                 player.getXp() +
                     10 * (App.getCurrentGame().getPlayer().getLevel() + 1) * App.getCurrentGame().getPlayer().getLevel()
             );
         }
         // Increase Health : H
-        if(Gdx.input.isKeyJustPressed(Input.Keys.H)) {
+        if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_3)) {
             player.setHealth(player.getHealth() + 1);
         }
         // Boss fight: B
-        if(Gdx.input.isKeyJustPressed(Input.Keys.B)) {
+        if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_4)) {
             //TODO: Boss Fight
         }
         // Infinite Ammo : G
-        if(Gdx.input.isKeyJustPressed(Input.Keys.G)) {
+        if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_5)) {
             player.getWeapon().setMaxAmmo(Integer.MAX_VALUE);
             player.getWeapon().setAmmo(Integer.MAX_VALUE);
         }

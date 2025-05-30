@@ -159,6 +159,9 @@ public class ScoreboardMenuView implements Screen {
         Main.getBatch().begin();
         GameAssetManager.getGameAssetManager().getBackground().draw(Main.getBatch());
         Main.getBatch().end();
+
+        GameAssetManager.getGameAssetManager().setColorFunction();
+
         stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
         stage.draw();
         controller.handleScoreBoard();

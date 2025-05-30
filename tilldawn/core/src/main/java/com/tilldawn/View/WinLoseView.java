@@ -2,6 +2,9 @@ package com.tilldawn.View;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -11,6 +14,7 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.tilldawn.Control.WinLoseController;
 import com.tilldawn.Main;
 import com.tilldawn.Model.App;
+import com.tilldawn.Model.GameAssetManager;
 
 public class WinLoseView implements Screen {
     private Stage stage;
@@ -124,6 +128,9 @@ public class WinLoseView implements Screen {
         ScreenUtils.clear(35 / 255f, 29 / 255f, 42 / 255f, 1);
         Main.getBatch().begin();
         Main.getBatch().end();
+
+        GameAssetManager.getGameAssetManager().setColorFunction();
+
         stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
         stage.draw();
         controller.handleWinLose();

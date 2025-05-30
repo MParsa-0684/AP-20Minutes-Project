@@ -23,6 +23,8 @@ public class PauseMenuController{
         if(view == null)
             return;
 
+        App.getCurrentUser().getPreGame().
+            setGameColor((view.getGameThemeCheckBox().isChecked()) ? Color.BLACK : Color.WHITE);
         App.getCurrentGame().getPreGame().
             setGameColor((view.getGameThemeCheckBox().isChecked()) ? Color.BLACK : Color.WHITE);
 

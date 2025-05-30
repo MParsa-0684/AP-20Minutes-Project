@@ -107,7 +107,7 @@ public class HintTalentMenuView implements Screen {
 
         cheatLabel.setText("Display cheat codes and their effects");
         List<String> cheatList = new List<>(skin);
-        cheatList.setItems("Decrease Time: T","Level Up : L","Increase Health : H", "Boss fight: B", "Infinite Ammo : G");
+        cheatList.setItems("Decrease Time: 1","Level Up : 2","Increase Health : 3", "Boss fight: 4", "Infinite Ammo : 5");
         this.cheatScrollPane = new ScrollPane(cheatList, skin);
 
         abilityLabel.setText("Display the effectiveness of game abilities");
@@ -142,6 +142,9 @@ public class HintTalentMenuView implements Screen {
 
         Main.getBatch().begin();
         Main.getBatch().end();
+
+        GameAssetManager.getGameAssetManager().setColorFunction();
+
         stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
         stage.draw();
         controller.handleHintTalent();
